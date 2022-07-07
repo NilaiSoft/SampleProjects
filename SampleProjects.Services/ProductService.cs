@@ -63,6 +63,11 @@ namespace SampleProjects.Services
             return await _productRepository.GetsAsync();
         }
 
+        public async Task<IList<Product>> GetsAsync(Expression<Func<Product, Product>> expression)
+        {
+            return await _productRepository.GetsAsync();
+        }
+
         public async Task<int> UpdateAsync(Product item)
         {
             return await _productRepository.UpdateAsync(item);

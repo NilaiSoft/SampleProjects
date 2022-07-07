@@ -17,6 +17,7 @@ namespace SampleProjects.Services
         Task<bool> DeleteAsync(Product item);
         Task<IList<Product>> GetsAsync(Expression<Func<Product, bool>> _pridicate);
         Task<IList<Product>> GetsAsync();
+        Task<IList<Product>> GetsAsync(Expression<Func<Product, Product>> expression);
         Task<Product> GetAsync(Expression<Func<Product, bool>> _pridicate);
         Task<Product> FindAsync(Expression<Func<Product, bool>> predicate);
         Task<bool> AnyAsync(Expression<Func<Product, bool>> expression);

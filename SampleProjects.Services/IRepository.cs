@@ -17,6 +17,7 @@ namespace SampleProjects.Services
         Task<bool> DeleteAsync(TEntity item);
         Task<IList<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> _pridicate);
         Task<IList<TEntity>> GetsAsync();
+        Task<IList<TEntity>> GetsAsync(Expression<Func<TEntity, TEntity>> expression);
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate);
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);

@@ -12,6 +12,6 @@ namespace SampleProjects.Models
         public string Name { get; set; }
         public int UnitId { get; set; }
         [ForeignKey(nameof(UnitId))]
-        public Unit unit { get; set; }
+        public Unit Unit { get; set; }
     }
 }
