@@ -12,17 +12,15 @@ using System.Threading.Tasks;
 namespace SampleProjects.Services
 {
     public class Repository<TEntity> : IRepository<TEntity>
-        where TEntity : BaseEntity, new()
+        where TEntity : BaseEntity
     {
         protected ApplicationDbContext _context;
         internal DbSet<TEntity> _dbSet;
-        public readonly ILogger _logger;
 
-        public Repository(ApplicationDbContext context, DbSet<TEntity> dbSet, ILogger logger)
+        public Repository(ApplicationDbContext context)
         {
             _context = context;
             _dbSet = _context.Set<TEntity>();
-            _logger = logger;
         }
 
         public async Task<int> AddAndSaveChangesAsync(TEntity entity)
@@ -57,9 +55,8 @@ namespace SampleProjects.Services
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.LogError(ex, "{Repo} Delete function error", typeof(Repository<TEntity>));
                 return false;
             }
         }

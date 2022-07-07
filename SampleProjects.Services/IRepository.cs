@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using SampleProjects.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Services
 {
-    public interface IRepository<TEntity> where TEntity : class, new()
+    public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         Task<EntityEntry<TEntity>> AddAsync(TEntity item);
         Task<int> AddAndSaveChangesAsync(TEntity entity);
