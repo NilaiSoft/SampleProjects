@@ -23,6 +23,11 @@ namespace SampleProjects.Services
             return await _productRepository.AddAndSaveChangesAsync(entity);
         }
 
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _productRepository.SaveChangesAsync();
+        }
+
         public async Task<EntityEntry<Product>> AddAsync(Product item)
         {
             return await _productRepository.AddAsync(item);
@@ -38,9 +43,9 @@ namespace SampleProjects.Services
             return await _productRepository.AnyAsync();
         }
 
-        public async Task<bool> DeleteAsync(Product item)
+        public async Task<bool> DeleteAsync(Expression<Func<Product, bool>> _pridicate)
         {
-            return await _productRepository.DeleteAsync(item);
+            return await _productRepository.DeleteAsync(_pridicate);
         }
 
         public async Task<Product> FindAsync(Expression<Func<Product, bool>> predicate)
@@ -65,7 +70,9 @@ namespace SampleProjects.Services
                 Id = x.Id,
                 Name = x.Name,
                 Unit = x.Unit,
-                UnitId = x.UnitId
+                UnitId = x.UnitId,
+                Description = x.Description,
+                StockQuantity = x.StockQuantity
             });
         }
 
@@ -74,9 +81,15 @@ namespace SampleProjects.Services
             return await _productRepository.GetsAsync();
         }
 
-        public async Task<int> UpdateAsync(Product item)
+        public async Task<int> EditAsync
+            (Expression<Func<Product, bool>> predicate, Expression<Func<Product, Product>> expression)
         {
-            return await _productRepository.UpdateAsync(item);
+            return await _productRepository.EditAsync(predicate, expression);
+        }
+
+        public async Task<Product> GetAsync(Expression<Func<Product, bool>> _pridicate, Expression<Func<Product, Product>> selectItem)
+        {
+            return await _productRepository.GetAsync(_pridicate, selectItem);
         }
     }
 }

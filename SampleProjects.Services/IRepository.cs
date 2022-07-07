@@ -13,8 +13,12 @@ namespace SampleProjects.Services
     {
         Task<EntityEntry<TEntity>> AddAsync(TEntity item);
         Task<int> AddAndSaveChangesAsync(TEntity entity);
-        Task<int> UpdateAsync(TEntity item);
-        Task<bool> DeleteAsync(TEntity item);
+        Task<int> SaveChangesAsync();
+        Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,
+            Expression<Func<TEntity, TEntity>> expression);
+        Task<TEntity> GetAsync
+            (Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem);
+        Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> _pridicate);
         Task<IList<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> _pridicate);
         Task<IList<TEntity>> GetsAsync
             (Expression<Func<TEntity, bool>> _pridicate,

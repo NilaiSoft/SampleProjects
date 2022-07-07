@@ -29,6 +29,11 @@ namespace SampleProjects.Services
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
         public async Task<EntityEntry<TEntity>> AddAsync(TEntity item)
         {
             return await _dbSet.AddAsync(item);
@@ -43,16 +48,16 @@ namespace SampleProjects.Services
             return _dbSet.AnyAsync();
         }
 
-        public async Task<bool> DeleteAsync(TEntity item)
+        public async Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> _pridicate)
         {
             try
             {
-                var exist = await _dbSet.Where(x => x.Id == item.Id)
+                var entity = await _dbSet.Where(_pridicate)
                                         .FirstOrDefaultAsync();
 
-                if (exist == null) return false;
+                if (entity == null) return false;
 
-                _dbSet.Remove(exist);
+                _dbSet.Remove(entity);
 
                 return true;
             }
@@ -93,9 +98,17 @@ namespace SampleProjects.Services
             return await _dbSet.Where(_pridicate).Select(_selectList).ToListAsync();
         }
 
-        public Task<int> UpdateAsync(TEntity item)
+        public async Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,
+            Expression<Func<TEntity, TEntity>> expression)
         {
-            throw new NotImplementedException();
+            var result =await _dbSet.Where(predicate)
+                .UpdateFromQueryAsync(expression);
+            return result;
+        }
+
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem)
+        {
+            return await _dbSet.Where(_pridicate).Select(selectItem).FirstOrDefaultAsync();
         }
     }
 }

@@ -38,9 +38,9 @@ namespace SampleProjects.Services
             return await _unitRepository.AnyAsync();
         }
 
-        public async Task<bool> DeleteAsync(Unit item)
+        public async Task<bool> DeleteAsync(Expression<Func<Unit, bool>> _pridicate)
         {
-            return await _unitRepository.DeleteAsync(item);
+            return await _unitRepository.DeleteAsync(_pridicate);
         }
 
         public async Task<Unit> FindAsync(Expression<Func<Unit, bool>> predicate)
@@ -63,9 +63,10 @@ namespace SampleProjects.Services
             return await _unitRepository.GetsAsync();
         }
 
-        public async Task<int> UpdateAsync(Unit item)
+        public async Task<int> EditAsync
+            (Expression<Func<Unit, bool>> predicate, Expression<Func<Unit, Unit>> expression)
         {
-            return await _unitRepository.UpdateAsync(item);
+            return await _unitRepository.EditAsync(predicate, expression);
         }
     }
 }

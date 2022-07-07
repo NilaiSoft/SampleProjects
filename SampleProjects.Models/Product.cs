@@ -10,6 +10,8 @@ namespace SampleProjects.Models
     public class Product : BaseEntity
     {
         public string Name { get; set; }
+        public string Description { get; set; }
+        public int StockQuantity { get; set; }
         public int UnitId { get; set; }
         [ForeignKey(nameof(UnitId))]
         public Unit Unit { get; set; }
