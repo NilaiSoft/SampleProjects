@@ -21,5 +21,7 @@ namespace SampleProjects.Models
 
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<StateProvince> StateProvinces { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
     }
 }

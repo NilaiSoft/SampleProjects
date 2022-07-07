@@ -10,6 +10,10 @@ namespace SampleProjects.Web
         {
             services.AddScoped<IRepository<City>, Repository<City>>();
             services.AddScoped<IRepository<StateProvince>, Repository<StateProvince>>();
+            services.AddScoped<IRepository<Product>, Repository<Product>>();
+            services.AddScoped<IRepository<Unit>, Repository<Unit>>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IUnitService, UnitService>();
         }
     }
 }
