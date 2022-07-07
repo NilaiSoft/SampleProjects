@@ -60,7 +60,13 @@ namespace SampleProjects.Services
 
         public async Task<IList<Product>> GetsAsync()
         {
-            return await _productRepository.GetsAsync();
+            return await _productRepository.GetsAsync(x => new Product
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Unit = x.Unit,
+                UnitId = x.UnitId
+            });
         }
 
         public async Task<IList<Product>> GetsAsync(Expression<Func<Product, Product>> expression)

@@ -16,8 +16,11 @@ namespace SampleProjects.Services
         Task<int> UpdateAsync(TEntity item);
         Task<bool> DeleteAsync(TEntity item);
         Task<IList<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> _pridicate);
+        Task<IList<TEntity>> GetsAsync
+            (Expression<Func<TEntity, bool>> _pridicate,
+            Expression<Func<TEntity, TEntity>> selectList);
         Task<IList<TEntity>> GetsAsync();
-        Task<IList<TEntity>> GetsAsync(Expression<Func<TEntity, TEntity>> expression);
+        Task<IList<TEntity>> GetsAsync(Expression<Func<TEntity, TEntity>> selectList);
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate);
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);

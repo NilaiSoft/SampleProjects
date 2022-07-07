@@ -87,6 +87,12 @@ namespace SampleProjects.Services
             return await _dbSet.Select(expression).ToListAsync();
         }
 
+        public async Task<IList<TEntity>> GetsAsync
+            (Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> _selectList)
+        {
+            return await _dbSet.Where(_pridicate).Select(_selectList).ToListAsync();
+        }
+
         public Task<int> UpdateAsync(TEntity item)
         {
             throw new NotImplementedException();
