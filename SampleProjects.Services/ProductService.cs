@@ -43,7 +43,7 @@ namespace SampleProjects.Services
             return await _productRepository.AnyAsync();
         }
 
-        public async Task<bool> DeleteAsync(Expression<Func<Product, bool>> _pridicate)
+        public async Task<int> DeleteAsync(Expression<Func<Product, bool>> _pridicate)
         {
             return await _productRepository.DeleteAsync(_pridicate);
         }

@@ -18,7 +18,7 @@ namespace SampleProjects.Services
             Expression<Func<TEntity, TEntity>> expression);
         Task<TEntity> GetAsync
             (Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem);
-        Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> _pridicate);
+        Task<int> DeleteAsync(Expression<Func<TEntity, bool>> _pridicate);
         Task<IList<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> _pridicate);
         Task<IList<TEntity>> GetsAsync
             (Expression<Func<TEntity, bool>> _pridicate,

@@ -16,7 +16,7 @@ namespace SampleProjects.Services
         Task<int> EditAsync(Expression<Func<Product, bool>> predicate,
             Expression<Func<Product, Product>> expression);
         Task<int> SaveChangesAsync();
-        Task<bool> DeleteAsync(Expression<Func<Product, bool>> _pridicate);
+        Task<int> DeleteAsync(Expression<Func<Product, bool>> _pridicate);
         Task<IList<Product>> GetsAsync(Expression<Func<Product, bool>> _pridicate);
         Task<IList<Product>> GetsAsync();
         Task<IList<Product>> GetsAsync(Expression<Func<Product, Product>> expression);

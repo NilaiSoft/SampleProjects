@@ -48,22 +48,21 @@ namespace SampleProjects.Services
             return _dbSet.AnyAsync();
         }
 
-        public async Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> _pridicate)
+        public async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> _pridicate)
         {
             try
             {
                 var entity = await _dbSet.Where(_pridicate)
                                         .FirstOrDefaultAsync();
 
-                if (entity == null) return false;
+                if (entity == null) return 0;
 
                 _dbSet.Remove(entity);
-
-                return true;
+                return await _context.SaveChangesAsync();
             }
             catch
             {
-                return false;
+                return 0;
             }
         }
 
@@ -101,7 +100,7 @@ namespace SampleProjects.Services
         public async Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,
             Expression<Func<TEntity, TEntity>> expression)
         {
-            var result =await _dbSet.Where(predicate)
+            var result = await _dbSet.Where(predicate)
                 .UpdateFromQueryAsync(expression);
             return result;
         }

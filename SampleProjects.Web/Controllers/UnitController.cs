@@ -38,5 +38,33 @@ namespace SampleProjects.Web.Controllers
             await _unitService.AddAndSaveChangesAsync(unit);
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var unit = await _unitService.GetAsync(x => x.Id == Id);
+            return View(unit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Unit unit)
+        {
+            await _unitService.EditAsync(x => x.Id == unit.Id, x => new Unit
+            {
+                Name = unit.Name
+            });
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _unitService.DeleteAsync(x => x.Id == id);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var unit = await _unitService.GetAsync(x => x.Id == id);
+            return View(unit);
+        }
     }
 }
