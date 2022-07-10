@@ -8,10 +8,7 @@ namespace SampleProjects.Web
     {
         public static void Mapper(this IServiceCollection services)
         {
-            services.AddScoped<IRepository<City>, Repository<City>>();
-            services.AddScoped<IRepository<StateProvince>, Repository<StateProvince>>();
-            services.AddScoped<IRepository<Product>, Repository<Product>>();
-            services.AddScoped<IRepository<Unit>, Repository<Unit>>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUnitService, UnitService>();
         }
