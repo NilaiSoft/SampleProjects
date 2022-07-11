@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SampleProjects.Services;
 using System;
 using System.Linq;
 
@@ -8,6 +9,8 @@ namespace SampleProjects.Framework.Infrastructure
     {
         public static void Register(this IServiceCollection services)
         {
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
             var appServices = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes())
                 .Where(t => t.FullName.EndsWith("Service")

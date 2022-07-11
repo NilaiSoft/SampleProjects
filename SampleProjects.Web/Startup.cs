@@ -37,7 +37,6 @@ namespace SampleProjects.Web
 
             services.AddRazorPages();
 
-            services.Mapper();
             services.Register();
         }
 
