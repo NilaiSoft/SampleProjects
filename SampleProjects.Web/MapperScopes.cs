@@ -17,13 +17,13 @@ namespace SampleProjects.Web
                               (t.IsClass || t.IsInterface))
                               select t;
 
-            foreach (var IService in appServices)
+            foreach (var iService in appServices)
             {
-                var Service = appServices.FirstOrDefault
-                    (x => x.Name == IService.Name.Substring
-                    (1, IService.Name.Length - 1));
-                if (Service != null)
-                    services.AddScoped(IService, Service);
+                var service = appServices.FirstOrDefault
+                    (x => x.Name == iService.Name.Substring
+                    (1, iService.Name.Length - 1));
+                if (service != null)
+                    services.AddScoped(iService, service);
             }
 
         }
