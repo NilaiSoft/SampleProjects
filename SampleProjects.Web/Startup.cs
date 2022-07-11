@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SampleProjects.Models;
+using SampleProjects.Web.Configs;
 
 namespace SampleProjects.Web
 {
@@ -73,6 +74,7 @@ namespace SampleProjects.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            app.ExceptionHandler();
         }
     }
 }
