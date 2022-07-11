@@ -4,10 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SampleProjects.Framework.Infrastructure;
 using SampleProjects.Models;
 using SampleProjects.Web.Configs;
-using System;
-using System.Linq;
 
 namespace SampleProjects.Web
 {
@@ -39,6 +38,7 @@ namespace SampleProjects.Web
             services.AddRazorPages();
 
             services.Mapper();
+            services.Register();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,7 +78,7 @@ namespace SampleProjects.Web
             });
             app.ExceptionHandler();
 
-            
+
         }
     }
 }
