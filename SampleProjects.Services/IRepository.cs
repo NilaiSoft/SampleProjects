@@ -16,6 +16,11 @@ namespace SampleProjects.Services
         Task<int> SaveChangesAsync();
         Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,
             Expression<Func<TEntity, TEntity>> expression);
+
+        Task<int> EditAsync(TEntity entity);
+
+        Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,TEntity entity);
+
         Task<TEntity> GetAsync
             (Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem);
         Task<int> DeleteAsync(Expression<Func<TEntity, bool>> _pridicate);

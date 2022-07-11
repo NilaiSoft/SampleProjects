@@ -109,5 +109,16 @@ namespace SampleProjects.Services
         {
             return await _dbSet.Where(_pridicate).Select(selectItem).FirstOrDefaultAsync();
         }
+
+        public async Task<int> EditAsync(TEntity entity)
+        {
+            _dbSet.Update(entity);
+            return await _context.SaveChangesAsync();
+        }
+
+        public Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate, TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

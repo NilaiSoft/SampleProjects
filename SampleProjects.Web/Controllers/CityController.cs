@@ -1,0 +1,21 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using SampleProjects.Models;
+using SampleProjects.Services;
+using SampleProjects.Web.BaseController;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SampleProjects.Web.Controllers
+{
+    public class CityController : BaseController<City>
+    {
+        private readonly IRepository<City> _cityRepository;
+
+        public CityController(IRepository<City> cityRepository)
+            : base(cityRepository)
+        {
+        }
+    }
+}
