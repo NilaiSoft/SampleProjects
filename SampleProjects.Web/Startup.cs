@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SampleProjects.Models;
 using SampleProjects.Web.Configs;
+using System;
+using System.Linq;
 
 namespace SampleProjects.Web
 {
@@ -75,6 +77,8 @@ namespace SampleProjects.Web
                 endpoints.MapRazorPages();
             });
             app.ExceptionHandler();
+
+            
         }
     }
 }
