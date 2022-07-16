@@ -29,6 +29,12 @@ namespace SampleProjects.Services
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<int> AddRangeAndSaveChangesAsync(IList<TEntity> entitys)
+        {
+            await _dbSet.AddRangeAsync(entitys);
+            return await _context.SaveChangesAsync();
+        }
+
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
@@ -37,6 +43,11 @@ namespace SampleProjects.Services
         public async Task<EntityEntry<TEntity>> AddAsync(TEntity item)
         {
             return await _dbSet.AddAsync(item);
+        }
+
+        public async Task AddRangeAsync(IList<TEntity> items)
+        {
+            await _dbSet.AddRangeAsync(items);
         }
 
         public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression)

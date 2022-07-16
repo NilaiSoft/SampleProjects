@@ -13,7 +13,9 @@ namespace SampleProjects.Services
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         Task<EntityEntry<TEntity>> AddAsync(TEntity item);
+        Task AddRangeAsync(IList<TEntity> items);
         Task<int> AddAndSaveChangesAsync(TEntity entity);
+        Task<int> AddRangeAndSaveChangesAsync(IList<TEntity> entitys);
         Task<int> SaveChangesAsync();
         Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,
             Expression<Func<TEntity, TEntity>> expression);
