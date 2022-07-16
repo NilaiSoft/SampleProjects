@@ -77,12 +77,6 @@ namespace SampleProjects.Services
             return await _StateProvinceRepository.GetsAsync();
         }
 
-        public async Task<int> EditAsync
-            (Expression<Func<StateProvince, bool>> predicate, Expression<Func<StateProvince, StateProvince>> expression)
-        {
-            return await _StateProvinceRepository.EditAsync(predicate, expression);
-        }
-
         public async Task<StateProvince> GetAsync(Expression<Func<StateProvince, bool>> _pridicate, Expression<Func<StateProvince, StateProvince>> selectItem)
         {
             return await _StateProvinceRepository.GetAsync(_pridicate, selectItem);

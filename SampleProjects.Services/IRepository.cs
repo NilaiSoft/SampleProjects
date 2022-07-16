@@ -17,8 +17,11 @@ namespace SampleProjects.Services
         Task<int> AddAndSaveChangesAsync(TEntity entity);
         Task<int> AddRangeAndSaveChangesAsync(IList<TEntity> entitys);
         Task<int> SaveChangesAsync();
-        Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,
-            Expression<Func<TEntity, TEntity>> expression);
+
+        #region EditUseZEntity
+        //Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,
+        //    Expression<Func<TEntity, TEntity>> expression);
+        #endregion
 
         Task<int> EditAsync(TEntity entity);
 

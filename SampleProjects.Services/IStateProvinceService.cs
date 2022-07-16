@@ -13,8 +13,6 @@ namespace SampleProjects.Services
     {
         Task<EntityEntry<StateProvince>> AddAsync(StateProvince item);
         Task<int> AddAndSaveChangesAsync(StateProvince entity);
-        Task<int> EditAsync(Expression<Func<StateProvince, bool>> predicate,
-            Expression<Func<StateProvince, StateProvince>> expression);
         Task<int> SaveChangesAsync();
         Task<int> DeleteAsync(Expression<Func<StateProvince, bool>> _pridicate);
         Task<IList<StateProvince>> GetsAsync(Expression<Func<StateProvince, bool>> _pridicate);

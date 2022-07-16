@@ -13,8 +13,6 @@ namespace SampleProjects.Services
     {
         Task<EntityEntry<Unit>> AddAsync(Unit item);
         Task<int> AddAndSaveChangesAsync(Unit entity);
-        Task<int> EditAsync(Expression<Func<Unit, bool>> predicate,
-            Expression<Func<Unit, Unit>> expression);
         Task<int> EditAsync(Unit unit);
         Task<int> DeleteAsync(Expression<Func<Unit, bool>> _pridicate);
         Task<IList<Unit>> GetsAsync(Expression<Func<Unit, bool>> _pridicate);

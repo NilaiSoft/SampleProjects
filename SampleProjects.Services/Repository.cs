@@ -108,17 +108,22 @@ namespace SampleProjects.Services
             return await _dbSet.Where(_pridicate).Select(_selectList).ToListAsync();
         }
 
-        public async Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,
-            Expression<Func<TEntity, TEntity>> expression)
-        {
-            var result = await _dbSet.Where(predicate)
-                .UpdateFromQueryAsync(expression);
-            return result;
-        }
+        #region UpdateUseZEntity
+        //public async Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,
+        //    Expression<Func<TEntity, TEntity>> expression)
+        //{
+        //    var result = await _dbSet.Where(predicate)
+        //        .UpdateFromQueryAsync(expression);
+        //    return result;
+        //}
+        #endregion
 
         public async Task<int> EditAsync(TEntity entity)
         {
-            _context.Entry<TEntity>(entity).State = EntityState.Modified;
+            #region OtherMethod
+            //_context.Entry<TEntity>(entity).State = EntityState.Modified;
+            #endregion
+            _dbSet.Update(entity);
             return await _context.SaveChangesAsync();
         }
 

@@ -81,12 +81,6 @@ namespace SampleProjects.Services
             return await _productRepository.GetsAsync();
         }
 
-        public async Task<int> EditAsync
-            (Expression<Func<Product, bool>> predicate, Expression<Func<Product, Product>> expression)
-        {
-            return await _productRepository.EditAsync(predicate, expression);
-        }
-
         public async Task<Product> GetAsync(Expression<Func<Product, bool>> _pridicate, Expression<Func<Product, Product>> selectItem)
         {
             return await _productRepository.GetAsync(_pridicate, selectItem);
