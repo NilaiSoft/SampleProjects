@@ -122,6 +122,13 @@ namespace SampleProjects.Services
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<int> EditAsync(Expression<Func<TEntity, TEntity>> predicate
+            , Expression<Func<TEntity, TEntity>> entity)
+        {
+            this._context.Entry(predicate).CurrentValues.SetValues(entity);
+            return await _context.SaveChangesAsync();
+        }
+
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem)
         {
             return await _dbSet.Where(_pridicate).Select(selectItem).FirstOrDefaultAsync();

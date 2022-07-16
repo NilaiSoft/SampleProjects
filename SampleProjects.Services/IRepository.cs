@@ -22,6 +22,9 @@ namespace SampleProjects.Services
 
         Task<int> EditAsync(TEntity entity);
 
+        Task<int> EditAsync(Expression<Func<TEntity, TEntity>> predicate
+            , Expression<Func<TEntity, TEntity>> entity);
+
         Task<TEntity> GetAsync
             (Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem);
         Task<int> DeleteAsync(Expression<Func<TEntity, bool>> _pridicate);
