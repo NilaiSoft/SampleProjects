@@ -48,10 +48,7 @@ namespace SampleProjects.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Unit unit)
         {
-            await _unitService.EditAsync(x => x.Id == unit.Id, x => new Unit
-            {
-                Name = unit.Name
-            });
+            await _unitService.EditAsync(unit);
             return RedirectToAction("Index");
         }
 

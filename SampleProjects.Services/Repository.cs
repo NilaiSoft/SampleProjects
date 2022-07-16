@@ -105,20 +105,15 @@ namespace SampleProjects.Services
             return result;
         }
 
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem)
-        {
-            return await _dbSet.Where(_pridicate).Select(selectItem).FirstOrDefaultAsync();
-        }
-
         public async Task<int> EditAsync(TEntity entity)
         {
-            _dbSet.Update(entity);
+            _context.Entry<TEntity>(entity).State = EntityState.Modified;
             return await _context.SaveChangesAsync();
         }
 
-        public Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate, TEntity entity)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem)
         {
-            throw new NotImplementedException();
+            return await _dbSet.Where(_pridicate).Select(selectItem).FirstOrDefaultAsync();
         }
     }
 }

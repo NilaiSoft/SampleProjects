@@ -52,15 +52,7 @@ namespace SampleProjects.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Product product)
         {
-            await _productService.EditAsync(
-                 x => x.Id == product.Id,
-                 x => new Product
-                 {
-                     Name = product.Name,
-                     StockQuantity = product.StockQuantity,
-                     Description = product.Description,
-                     UnitId = product.UnitId,
-                 });
+            await _productService.EditAsync(product);
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Details(int id)

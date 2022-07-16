@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SampleProjects.Models;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,6 @@ namespace SampleProjects.Services
             Expression<Func<TEntity, TEntity>> expression);
 
         Task<int> EditAsync(TEntity entity);
-
-        Task<int> EditAsync(Expression<Func<TEntity, bool>> predicate,TEntity entity);
 
         Task<TEntity> GetAsync
             (Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem);

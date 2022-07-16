@@ -91,5 +91,10 @@ namespace SampleProjects.Services
         {
             return await _productRepository.GetAsync(_pridicate, selectItem);
         }
+
+        public async Task<int> EditAsync(Product product)
+        {
+            return await _productRepository.EditAsync(product);
+        }
     }
 }

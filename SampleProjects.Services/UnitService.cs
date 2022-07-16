@@ -68,5 +68,10 @@ namespace SampleProjects.Services
         {
             return await _unitRepository.EditAsync(predicate, expression);
         }
+
+        public async Task<int> EditAsync(Unit unit)
+        {
+            return await _unitRepository.EditAsync(unit);
+        }
     }
 }
