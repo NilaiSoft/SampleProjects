@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Web.BaseController
 {
-    public class BaseController<TEntity, ViewEntity> : Controller,
-        IBaseController<TEntity, ViewEntity> where TEntity : BaseEntity
+    public class BaseController<TEntity, TVModel> : Controller,
+        IBaseController<TEntity, TVModel> where TEntity : BaseEntity
     {
-        private readonly IRepository<TEntity> _repository;
+        private readonly IRepository<TEntity, TVModel> _repository;
         private readonly IMapper _mapper;
 
-        public BaseController(IRepository<TEntity> repository, IMapper mapper)
+        public BaseController(IRepository<TEntity, TVModel> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -33,11 +33,11 @@ namespace SampleProjects.Web.BaseController
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Create(TEntity entity)
+        public virtual async Task<IActionResult> Create(TVModel entity)
         {
-            var model = _mapper.Map<ViewEntity>(entity);
+            var model = _mapper.Map<TEntity>(entity);
 
-            var result = await _repository.AddAndSaveChangesAsync(entity);
+            var result = await _repository.AddAndSaveChangesAsync(model);
             return RedirectToAction("Index");
         }
 

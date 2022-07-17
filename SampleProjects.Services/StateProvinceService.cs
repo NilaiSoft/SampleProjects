@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SampleProjects.Models;
+using SampleProjects.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace SampleProjects.Services
 {
     public class StateProvinceService : IStateProvinceService
     {
-        private readonly IRepository<StateProvince> _StateProvinceRepository;
+        private readonly IRepository<StateProvince, StateProvinceModel> _StateProvinceRepository;
 
-        public StateProvinceService(IRepository<StateProvince> StateProvinceRepository)
+        public StateProvinceService(IRepository<StateProvince, StateProvinceModel> StateProvinceRepository)
         {
             _StateProvinceRepository = StateProvinceRepository;
         }

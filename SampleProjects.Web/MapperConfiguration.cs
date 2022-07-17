@@ -10,6 +10,7 @@ namespace SampleProjects.Web
         protected virtual void CreateConfigMaps()
         {
             CreateMap<Category, CategoryMoedl>();
+            CreateMap<PictureBinary, PictureBinaryModel>();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace SampleProjects.Framework.Infrastructure
     {
         public static void Register(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
             var appServices = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes())

@@ -7,14 +7,14 @@ using SampleProjects.Models;
 
 namespace SampleProjects.Web.BaseController
 {
-    public interface IBaseController<TEntity, ViewEntity> 
+    public interface IBaseController<TEntity, TVModel>
         where TEntity : BaseEntity
     {
         Task<IActionResult> Index();
         Task<IActionResult> Create();
 
         [HttpPost]
-        Task<IActionResult> Create(TEntity entity);
+        Task<IActionResult> Create(TVModel entity);
         Task<IActionResult> Edit(int id);
 
         [HttpPost]

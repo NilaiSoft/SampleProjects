@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SampleProjects.Models;
+using SampleProjects.Models.ViewModels;
 using SampleProjects.Services;
 using SampleProjects.Web.BaseController;
 using System;
@@ -9,16 +11,17 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Web.Controllers
 {
-    public class CategoryController : BaseController<Category>
+    public class CategoryController : BaseController<Category, CategoryMoedl>
     {
-        private readonly IRepository<Category> _repository;
-        public CategoryController(IRepository<Category> repository)
-            : base(repository)
+        private readonly IRepository<Category, CategoryMoedl> _repository;
+        private static readonly IMapper _mapper;
+        public CategoryController(IRepository<Category, CategoryMoedl> repository, IMapper mapper)
+            : base(repository, _mapper)
         {
             _repository = repository;
         }
 
-        public override Task<IActionResult> Create(Category entity)
+        public override Task<IActionResult> Create(CategoryMoedl entity)
         {
 
             return base.Create(entity);

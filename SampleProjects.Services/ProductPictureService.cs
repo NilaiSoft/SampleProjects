@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SampleProjects.Models;
+using SampleProjects.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace SampleProjects.Services
 {
     public class ProductPictureService : IProductPictureService
     {
-        private readonly IRepository<ProductPicture> _productPictureRepository;
+        private readonly IRepository<ProductPicture, ProductPictureModel> _productPictureRepository;
 
-        public ProductPictureService(IRepository<ProductPicture> productPictureRepository)
+        public ProductPictureService(IRepository<ProductPicture, ProductPictureModel> productPictureRepository)
         {
             _productPictureRepository = productPictureRepository;
         }

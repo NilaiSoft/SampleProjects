@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SampleProjects.Models;
+using SampleProjects.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace SampleProjects.Services
 {
     public class PictureBinaryService : IPictureBinaryService
     {
-        private readonly IRepository<PictureBinary> _pictureBinaryRepository;
+        private readonly IRepository<PictureBinary, PictureBinaryModel> _pictureBinaryRepository;
 
-        public PictureBinaryService(IRepository<PictureBinary> pictureBinaryRepository)
+        public PictureBinaryService(IRepository<PictureBinary, PictureBinaryModel> pictureBinaryRepository)
         {
             _pictureBinaryRepository = pictureBinaryRepository;
         }
