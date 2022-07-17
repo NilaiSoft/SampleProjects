@@ -7,7 +7,8 @@ using SampleProjects.Models;
 
 namespace SampleProjects.Web.BaseController
 {
-    public interface IBaseController<TEntity> where TEntity : BaseEntity
+    public interface IBaseController<TEntity, ViewEntity> 
+        where TEntity : BaseEntity
     {
         Task<IActionResult> Index();
         Task<IActionResult> Create();

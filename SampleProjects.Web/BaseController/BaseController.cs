@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SampleProjects.Models;
 using SampleProjects.Services;
 using System;
@@ -8,14 +9,16 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Web.BaseController
 {
-    public class BaseController<TEntity> : Controller,
-        IBaseController<TEntity> where TEntity : BaseEntity
+    public class BaseController<TEntity, ViewEntity> : Controller,
+        IBaseController<TEntity, ViewEntity> where TEntity : BaseEntity
     {
         private readonly IRepository<TEntity> _repository;
+        private readonly IMapper _mapper;
 
-        public BaseController(IRepository<TEntity> repository)
+        public BaseController(IRepository<TEntity> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public virtual async Task<IActionResult> Index()
@@ -32,6 +35,8 @@ namespace SampleProjects.Web.BaseController
         [HttpPost]
         public virtual async Task<IActionResult> Create(TEntity entity)
         {
+            var model = _mapper.Map<ViewEntity>(entity);
+
             var result = await _repository.AddAndSaveChangesAsync(entity);
             return RedirectToAction("Index");
         }
