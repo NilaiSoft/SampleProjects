@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SampleProjects.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SampleProjects.Models
 {
@@ -23,5 +19,10 @@ namespace SampleProjects.Models
         public virtual DbSet<StateProvince> StateProvinces { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
+        public virtual DbSet<Picture> Pictures { get; set; }
+        public virtual DbSet<PictureBinary> PictureBinaries { get; set; }
+        public virtual DbSet<ProductPicture> ProductPictures { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
     }
 }
