@@ -14,10 +14,9 @@ namespace SampleProjects.Web.Controllers
     public class CityController : BaseController<City, CityModel>
     {
         private readonly IRepository<City, CityModel> _cityRepository;
-        private static readonly IMapper _mapper;
 
-        public CityController(IRepository<City, CityModel> cityRepository)
-            : base(cityRepository, _mapper)
+        public CityController(IRepository<City, CityModel> cityRepository,IMapper mapper)
+            : base(cityRepository, mapper)
         {
         }
     }

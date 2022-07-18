@@ -13,12 +13,10 @@ namespace SampleProjects.Web.Controllers
 {
     public class StateProvinceController : BaseController<StateProvince, StateProvinceModel>
     {
-        private readonly IRepository<StateProvince, StateProvinceModel> _repository;
-        private static readonly IMapper _mapper;
-        public StateProvinceController(IRepository<StateProvince, StateProvinceModel> repository)
-            : base(repository,_mapper)
+        public StateProvinceController(IRepository<StateProvince, StateProvinceModel> repository, IMapper mapper)
+            : base(repository, mapper)
         {
-            _repository = repository;
+
         }
     }
 }

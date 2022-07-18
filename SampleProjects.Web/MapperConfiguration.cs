@@ -7,10 +7,10 @@ namespace SampleProjects.Web
 {
     public class MapperConfiguration : Profile
     {
-        //public MapperConfiguration()
-        //{
-        //    CreateConfigMaps();
-        //}
+        public MapperConfiguration()
+        {
+            CreateConfigMaps();
+        }
         protected virtual void CreateConfigMaps()
         {
             CreateMap<Category, CategoryMoedl>();
@@ -23,6 +23,8 @@ namespace SampleProjects.Web
             CreateMap<PictureBinaryModel, PictureBinary>();
             CreateMap<Unit, UnitModel>();
             CreateMap<UnitModel, Unit>();
+            CreateMap<City, CityModel>().ReverseMap();
+            CreateMap<StateProvince, StateProvinceModel>().ReverseMap();
         }
     }
 }
