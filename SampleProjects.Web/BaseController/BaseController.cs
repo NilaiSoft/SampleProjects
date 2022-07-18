@@ -59,5 +59,11 @@ namespace SampleProjects.Web.BaseController
             var result = await _repository.DeleteAsync(x => x.Id == id);
             return RedirectToAction("Index");
         }
+
+        public virtual async Task<IActionResult> Details(int id)
+        {
+            var model = await _repository.GetAsync(x => x.Id == id);
+            return View(model);
+        }
     }
 }

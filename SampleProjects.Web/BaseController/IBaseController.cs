@@ -21,5 +21,7 @@ namespace SampleProjects.Web.BaseController
         Task<IActionResult> Edit(TEntity entity);
 
         Task<IActionResult> Delete(int id);
+
+        Task<IActionResult> Details(int id);
     }
 }

@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SampleProjects.Models;
+using SampleProjects.Models.ViewModels;
 using SampleProjects.Services;
+using SampleProjects.Web.BaseController;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,72 +12,53 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Web.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController<Product, ProductModel>
     {
         private readonly IProductService _productService;
         private readonly IUnitService _unitService;
 
         public ProductController(IProductService productService,
-            IUnitService unitService)
+            IUnitService unitService, IMapper mapper
+            , IRepository<Product, ProductModel> repository) : base(repository, mapper)
         {
             _productService = productService;
             _unitService = unitService;
         }
 
-        public async Task<IActionResult> Index()
+        public override async Task<IActionResult> Index()
         {
             var products = await _productService.GetsAsync();
             return View(products);
         }
 
-        public async Task<IActionResult> Create()
+        public override async Task<IActionResult> Create()
         {
             var units = await _unitService.GetsAsync();
             ViewBag.UnitList = new SelectList(units, "Id", "Name");
-            return View();
+            return await base.Create();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(Product product)
-        {
-            await _productService.AddAndSaveChangesAsync(product);
-            return RedirectToAction("Index");
-        }
-
-        public async Task<IActionResult> Edit(int id)
+        public override async Task<IActionResult> Edit(int id)
         {
             var product = await _productService.GetAsync(x => x.Id == id);
             var units = await _unitService.GetsAsync();
             ViewBag.UnitList = new SelectList(units, "Id", "Name");
-            return View(product);
+            return await base.Edit(id);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(Product product)
-        {
-            await _productService.EditAsync(product);
-            return RedirectToAction("Index");
-        }
-        public async Task<IActionResult> Details(int id)
+        public override async Task<IActionResult> Details(int id)
         {
             var product = await _productService.GetAsync(x => x.Id == id,
-                x => new Product
-                {
-                    Description = x.Description,
-                    Id = x.Id,
-                    Name = x.Name,
-                    StockQuantity = x.StockQuantity,
-                    UnitId = x.UnitId,
-                    Unit = x.Unit
-                });
-
+            x => new Product
+            {
+                Description = x.Description,
+                Id = x.Id,
+                Name = x.Name,
+                StockQuantity = x.StockQuantity,
+                UnitId = x.UnitId,
+                Unit = x.Unit
+            });
             return View(product);
-        }
-
-        public async Task<IActionResult> Delete(int id)
-        {
-            var result = await _productService.DeleteAsync(x => x.Id == id);
-            return RedirectToAction("Index");
         }
     }
 }
