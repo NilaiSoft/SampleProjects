@@ -7,6 +7,10 @@ namespace SampleProjects.Web
 {
     public class MapperConfiguration : Profile
     {
+        //public MapperConfiguration()
+        //{
+        //    CreateConfigMaps();
+        //}
         protected virtual void CreateConfigMaps()
         {
             CreateMap<Category, CategoryMoedl>();
