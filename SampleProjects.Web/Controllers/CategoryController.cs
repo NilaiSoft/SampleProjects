@@ -14,9 +14,8 @@ namespace SampleProjects.Web.Controllers
     public class CategoryController : BaseController<Category, CategoryMoedl>
     {
         private readonly IRepository<Category, CategoryMoedl> _repository;
-        private static readonly IMapper _mapper;
         public CategoryController(IRepository<Category, CategoryMoedl> repository, IMapper mapper)
-            : base(repository, _mapper)
+            : base(repository, mapper)
         {
             _repository = repository;
         }
