@@ -29,6 +29,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="NLog" Version="5.0.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,5 +42,11 @@
   <ItemGroup>
     <Folder Include="AdminMapperConfiguration\" />
     <Folder Include="Areas\Admin\Infrastructure\Mapper\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

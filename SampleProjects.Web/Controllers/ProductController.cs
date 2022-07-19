@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using SampleProjects.Models;
 using SampleProjects.Models.ViewModels;
 using SampleProjects.Services;
@@ -13,17 +14,21 @@ namespace SampleProjects.Web.Controllers
     {
         private readonly IProductService _productService;
         private readonly IUnitService _unitService;
+        private readonly ILogger<ProductController> _logger;
 
         public ProductController(IProductService productService,
             IUnitService unitService, IMapper mapper
-            , IRepository<Product, ProductModel> repository) : base(repository, mapper)
+            , IRepository<Product, ProductModel> repository, ILogger<ProductController> logger) : base(repository, mapper)
         {
             _productService = productService;
             _unitService = unitService;
+            _logger = logger;
+            _logger.LogDebug(1, $"NLog injected into {nameof(ProductController)}");
         }
 
         public override async Task<IActionResult> Index()
         {
+            _logger.LogInformation(nameof(Index));
             var products = await _productService.GetsAsync();
             return View(products);
         }
