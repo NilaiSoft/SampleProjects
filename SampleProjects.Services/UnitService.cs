@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SampleProjects.Models;
+using SampleProjects.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace SampleProjects.Services
 {
     public class UnitService : IUnitService
     {
-        private readonly IRepository<Unit> _unitRepository;
+        private readonly IRepository<Unit, UnitModel> _unitRepository;
 
-        public UnitService(IRepository<Unit> unitRepository)
+        public UnitService(IRepository<Unit, UnitModel> unitRepository)
         {
             _unitRepository = unitRepository;
         }

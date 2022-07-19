@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SampleProjects.Models;
 using SampleProjects.Services;
 using System;
@@ -8,14 +9,16 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Web.BaseController
 {
-    public class BaseController<TEntity> : Controller,
-        IBaseController<TEntity> where TEntity : BaseEntity
+    public class BaseController<TEntity, TVModel> : Controller,
+        IBaseController<TEntity, TVModel> where TEntity : BaseEntity
     {
-        private readonly IRepository<TEntity> _repository;
+        private readonly IRepository<TEntity, TVModel> _repository;
+        private readonly IMapper _mapper;
 
-        public BaseController(IRepository<TEntity> repository)
+        public BaseController(IRepository<TEntity, TVModel> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public virtual async Task<IActionResult> Index()
@@ -30,9 +33,11 @@ namespace SampleProjects.Web.BaseController
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Create(TEntity entity)
+        public virtual async Task<IActionResult> Create(TVModel entity)
         {
-            var result = await _repository.AddAndSaveChangesAsync(entity);
+            var model = _mapper.Map<TEntity>(entity);
+
+            var result = await _repository.AddAndSaveChangesAsync(model);
             return RedirectToAction("Index");
         }
 
@@ -53,6 +58,12 @@ namespace SampleProjects.Web.BaseController
         {
             var result = await _repository.DeleteAsync(x => x.Id == id);
             return RedirectToAction("Index");
+        }
+
+        public virtual async Task<IActionResult> Details(int id)
+        {
+            var model = await _repository.GetAsync(x => x.Id == id);
+            return View(model);
         }
     }
 }

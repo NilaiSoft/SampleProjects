@@ -34,6 +34,7 @@ namespace SampleProjects.Web
                 //options.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAutoMapper();
 
             services.AddRazorPages();
 

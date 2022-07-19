@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Services
 {
-    public interface IRepository<TEntity> where TEntity : BaseEntity
+    public interface IRepository<TEntity,TVModel> where TEntity : BaseEntity
     {
         Task<EntityEntry<TEntity>> AddAsync(TEntity item);
         Task AddRangeAsync(IList<TEntity> items);

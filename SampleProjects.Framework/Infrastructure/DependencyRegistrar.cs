@@ -9,7 +9,7 @@ namespace SampleProjects.Framework.Infrastructure
     {
         public static void Register(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
             var appServices = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes())
@@ -17,7 +17,11 @@ namespace SampleProjects.Framework.Infrastructure
                 && (t.IsClass || t.IsInterface))
                 .Select(x => x);
 
-            foreach (var IService in appServices)
+            appServices = appServices
+                .Where(x => x.FullName.StartsWith("SampleProjects.Services"));
+
+            foreach (var IService in appServices
+                .Where(x => x.FullName.StartsWith("SampleProjects.Services")))
             {
                 var Service = appServices.FirstOrDefault
                     (x => x.Name == IService.Name.Substring

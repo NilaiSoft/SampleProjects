@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Services
 {
-    public class Repository<TEntity> : IRepository<TEntity>
+    public class Repository<TEntity, TModel> : IRepository<TEntity,TModel>
         where TEntity : BaseEntity
     {
         protected ApplicationDbContext _context;
