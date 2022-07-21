@@ -40,6 +40,12 @@ namespace SampleProjects.Web.Controllers
             return await base.Create();
         }
 
+        public override async Task<IActionResult> Create(ProductModel entity)
+        {
+            await _productService.AddAndSaveChangesAsync(entity);
+            return RedirectToAction(nameof(Index));
+        }
+
         public override async Task<IActionResult> Edit(int id)
         {
             var product = await _productService.GetAsync(x => x.Id == id);

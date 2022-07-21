@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,5 +18,8 @@ namespace SampleProjects.Models
         /// Gets or sets the picture identifier
         /// </summary>
         public int PictureId { get; set; }
+
+        [ForeignKey(nameof(PictureId))]
+        public Picture Picture { get; set; }
     }
 }

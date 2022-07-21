@@ -13,15 +13,59 @@ namespace SampleProjects.Services
     public class ProductService : IProductService
     {
         private readonly IRepository<Product, ProductModel> _productRepository;
+        private readonly IRepository<Picture, PictureModel> _pictureRepository;
+        private readonly IRepository<PictureBinary, ProductPictureModel> _pictureBinaryRepository;
+        private readonly IRepository<ProductPicture, ProductPictureModel> _productPictureRepository;
 
-        public ProductService(IRepository<Product, ProductModel> productRepository)
+        public ProductService(IRepository<Product, ProductModel> productRepository, IRepository<Picture, PictureModel> pictureRepository, IRepository<PictureBinary, ProductPictureModel> pictureBinaryRepository, IRepository<ProductPicture, ProductPictureModel> productPictureRepository)
         {
             _productRepository = productRepository;
+            _pictureRepository = pictureRepository;
+            _pictureBinaryRepository = pictureBinaryRepository;
+            _productPictureRepository = productPictureRepository;
         }
 
-        public async Task<int> AddAndSaveChangesAsync(Product entity)
+        public async Task<int> AddAndSaveChangesAsync(ProductModel model)
         {
-            return await _productRepository.AddAndSaveChangesAsync(entity);
+            var picture = new Picture
+            {
+                SeoFilename = model.Name,
+                Deleted = false,
+                AltAttribute = model.Name,
+                IsNew = true,
+                MimeType = model.Name,
+                TitleAttribute = model.Name,
+                Visibled = true
+            };
+
+            var pic = await _pictureRepository.AddAsync(picture);
+            var picBin = new PictureBinary
+            {
+                Picture = pic.Entity
+            };
+
+            await _pictureBinaryRepository.AddAsync(picBin);
+
+            var product = new Product
+            {
+                Deleted = false,
+                Description = model.Description,
+                Name = model.Name,
+                StockQuantity = model.StockQuantity,
+                UnitId = model.UnitId,
+            };
+            var insertProduct = await _productRepository.AddAsync(product);
+
+            var pictureProduct = new ProductPicture
+            {
+                Picture = picture,
+                Product = insertProduct.Entity,
+                Visibled = true,
+                Deleted = false
+            };
+
+            return await _productPictureRepository
+                .AddAndSaveChangesAsync(pictureProduct);
         }
 
         public async Task<int> SaveChangesAsync()

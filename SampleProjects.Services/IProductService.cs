@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SampleProjects.Models;
+using SampleProjects.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace SampleProjects.Services
     public interface IProductService
     {
         Task<EntityEntry<Product>> AddAsync(Product item);
-        Task<int> AddAndSaveChangesAsync(Product entity);
+        Task<int> AddAndSaveChangesAsync(ProductModel model);
         Task<int> EditAsync(Product product);
         Task<int> SaveChangesAsync();
         Task<int> DeleteAsync(Expression<Func<Product, bool>> _pridicate);
