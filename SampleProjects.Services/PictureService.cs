@@ -13,10 +13,12 @@ namespace SampleProjects.Services
     public class PictureService : IPictureService
     {
         private readonly IRepository<Picture, PictureModel> _pictureRepository;
+        private readonly IRepository<PictureBinary, PictureBinaryModel> _pictureBinaryRepository;
 
-        public PictureService(IRepository<Picture, PictureModel> pictureRepository)
+        public PictureService(IRepository<Picture, PictureModel> pictureRepository, IRepository<PictureBinary, PictureBinaryModel> pictureBinaryRepository)
         {
             _pictureRepository = pictureRepository;
+            _pictureBinaryRepository = pictureBinaryRepository;
         }
 
         public async Task<int> AddAndSaveChangesAsync(Picture entity)
@@ -24,9 +26,26 @@ namespace SampleProjects.Services
             return await _pictureRepository.AddAndSaveChangesAsync(entity);
         }
 
-        public async Task<EntityEntry<Picture>> AddAsync(Picture item)
+        public async Task<EntityEntry<Picture>> AddAsync(PictureModel item)
         {
-            return await _pictureRepository.AddAsync(item);
+            var picture = new Picture
+            {
+                SeoFilename = item.SeoFilename,
+                Deleted = false,
+                AltAttribute = item.AltAttribute,
+                IsNew = item.IsNew,
+                MimeType = item.MimeType,
+                TitleAttribute = item.TitleAttribute,
+                Visibled = true
+            };
+
+            var pic = await _pictureRepository.AddAsync(picture);
+            var picBin = new PictureBinary
+            {
+                Picture = pic.Entity
+            };
+            await _pictureBinaryRepository.AddAsync(picBin);
+            return await _pictureRepository.AddAsync(picture);
         }
 
         public async Task<bool> AnyAsync(Expression<Func<Picture, bool>> expression)

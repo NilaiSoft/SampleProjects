@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SampleProjects.Models;
+using SampleProjects.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace SampleProjects.Services
 {
     public interface IPictureService
     {
-        Task<EntityEntry<Picture>> AddAsync(Picture item);
+        Task<EntityEntry<Picture>> AddAsync(PictureModel item);
         Task<int> AddAndSaveChangesAsync(Picture entity);
         Task<int> EditAsync(Picture picture);
         Task<int> DeleteAsync(Expression<Func<Picture, bool>> _pridicate);

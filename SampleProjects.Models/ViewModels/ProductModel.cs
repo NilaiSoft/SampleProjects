@@ -13,6 +13,7 @@ namespace SampleProjects.Models.ViewModels
         public string Description { get; set; }
         public int StockQuantity { get; set; }
         public int UnitId { get; set; }
+        public PictureModel PictureModel { get; set; }
         public IFormFile ImageFile { get; set; }
     }
 }

@@ -13,11 +13,11 @@ namespace SampleProjects.Services
     public class ProductService : IProductService
     {
         private readonly IRepository<Product, ProductModel> _productRepository;
-        private readonly IRepository<Picture, PictureModel> _pictureRepository;
+        private readonly IPictureService _pictureRepository;
         private readonly IRepository<PictureBinary, ProductPictureModel> _pictureBinaryRepository;
         private readonly IRepository<ProductPicture, ProductPictureModel> _productPictureRepository;
 
-        public ProductService(IRepository<Product, ProductModel> productRepository, IRepository<Picture, PictureModel> pictureRepository, IRepository<PictureBinary, ProductPictureModel> pictureBinaryRepository, IRepository<ProductPicture, ProductPictureModel> productPictureRepository)
+        public ProductService(IRepository<Product, ProductModel> productRepository, IPictureService pictureRepository, IRepository<PictureBinary, ProductPictureModel> pictureBinaryRepository, IRepository<ProductPicture, ProductPictureModel> productPictureRepository)
         {
             _productRepository = productRepository;
             _pictureRepository = pictureRepository;
@@ -27,24 +27,16 @@ namespace SampleProjects.Services
 
         public async Task<int> AddAndSaveChangesAsync(ProductModel model)
         {
-            var picture = new Picture
+            var pictureModel = new PictureModel
             {
-                SeoFilename = model.Name,
-                Deleted = false,
                 AltAttribute = model.Name,
-                IsNew = true,
-                MimeType = model.Name,
+                SeoFilename = model.Name,
                 TitleAttribute = model.Name,
-                Visibled = true
+                IsNew = true,
+                MimeType = model.Name
             };
 
-            var pic = await _pictureRepository.AddAsync(picture);
-            var picBin = new PictureBinary
-            {
-                Picture = pic.Entity
-            };
-
-            await _pictureBinaryRepository.AddAsync(picBin);
+            var picture = await _pictureRepository.AddAsync(pictureModel);
 
             var product = new Product
             {
@@ -54,11 +46,12 @@ namespace SampleProjects.Services
                 StockQuantity = model.StockQuantity,
                 UnitId = model.UnitId,
             };
+
             var insertProduct = await _productRepository.AddAsync(product);
 
             var pictureProduct = new ProductPicture
             {
-                Picture = picture,
+                Picture = picture.Entity,
                 Product = insertProduct.Entity,
                 Visibled = true,
                 Deleted = false
