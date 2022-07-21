@@ -57,8 +57,9 @@ namespace SampleProjects.Services
                 Deleted = false
             };
 
-            return await _productPictureRepository
-                .AddAndSaveChangesAsync(pictureProduct);
+            await _productPictureRepository.AddAsync(pictureProduct);
+
+            return await _productRepository.SaveChangesAsync();
         }
 
         public async Task<int> SaveChangesAsync()
