@@ -40,6 +40,7 @@ namespace SampleProjects.Web.Controllers
             return await base.Create();
         }
 
+        [HttpPost]
         public override async Task<IActionResult> Create(ProductModel entity)
         {
             await _productService.AddAndSaveChangesAsync(entity);

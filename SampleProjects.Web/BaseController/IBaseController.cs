@@ -18,7 +18,7 @@ namespace SampleProjects.Web.BaseController
         Task<IActionResult> Edit(int id);
 
         [HttpPost]
-        Task<IActionResult> Edit(TEntity entity);
+        Task<IActionResult> Edit(TVModel entity);
 
         Task<IActionResult> Delete(int id);
 

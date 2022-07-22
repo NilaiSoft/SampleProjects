@@ -48,9 +48,10 @@ namespace SampleProjects.Web.BaseController
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Edit(TEntity entity)
+        public virtual async Task<IActionResult> Edit(TVModel entity)
         {
-            var result = await _repository.EditAsync(entity);
+            var model = _mapper.Map<TEntity>(entity);
+            var result = await _repository.EditAsync(model);
             return RedirectToAction("Index");
         }
 
