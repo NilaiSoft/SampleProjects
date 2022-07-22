@@ -55,6 +55,13 @@ namespace SampleProjects.Web.Controllers
             return await base.Edit(id);
         }
 
+        [HttpPost]
+        public override async Task<IActionResult> Edit(ProductModel entity)
+        {
+            await _productService.EditAsync(entity);
+            return RedirectToAction(nameof(Index));
+        }
+
         public override async Task<IActionResult> Details(int id)
         {
             var product = await _productService.GetAsync(x => x.Id == id,

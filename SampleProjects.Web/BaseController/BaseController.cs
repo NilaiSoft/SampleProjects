@@ -44,7 +44,8 @@ namespace SampleProjects.Web.BaseController
         public virtual async Task<IActionResult> Edit(int id)
         {
             var model = await _repository.GetAsync(x => x.Id == id);
-            return View(model);
+            var model2 = _mapper.Map<TVModel>(model);
+            return View(model2);
         }
 
         [HttpPost]

@@ -19,6 +19,7 @@ namespace SampleProjects.Web
 
 
             CreateMap<CategoryMoedl, Category>();
+            CreateMap<ProductModel, Product>().ReverseMap();
             CreateMap<PictureBinary, PictureBinaryModel>();
             CreateMap<PictureBinaryModel, PictureBinary>();
             CreateMap<Unit, UnitModel>();

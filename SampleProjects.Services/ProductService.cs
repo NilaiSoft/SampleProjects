@@ -125,8 +125,17 @@ namespace SampleProjects.Services
             return await _productRepository.GetAsync(_pridicate, selectItem);
         }
 
-        public async Task<int> EditAsync(Product product)
+        public async Task<int> EditAsync(ProductModel model)
         {
+            var product = new Product
+            {
+                Description = model.Description,
+                StockQuantity = model.StockQuantity,
+                UnitId = model.UnitId,
+                Name = model.Name,
+                Id = model.Id
+            };
+
             return await _productRepository.EditAsync(product);
         }
     }
