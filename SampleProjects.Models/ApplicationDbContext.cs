@@ -52,6 +52,7 @@ namespace SampleProjects.Models
             {
                 await _transaction.RollbackAsync();
                 await _transaction.DisposeAsync();
+                return 0;
             }
         }
     }
