@@ -133,7 +133,7 @@ namespace SampleProjects.Services
         public async Task<int> EditAsync(Expression<Func<TEntity, TEntity>> predicate
             , Expression<Func<TEntity, TEntity>> entity)
         {
-            this._context.Entry(predicate).CurrentValues.SetValues(entity);
+            _context.Entry(predicate).CurrentValues.SetValues(entity);
             return await _uow.CompleteAsync();
         }
 
