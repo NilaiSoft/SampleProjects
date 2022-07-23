@@ -48,7 +48,7 @@ namespace SampleProjects.Models
                 _transaction.Commit();
                 return result;
             }
-            finally
+            catch
             {
                 await _transaction.RollbackAsync();
                 await _transaction.DisposeAsync();
