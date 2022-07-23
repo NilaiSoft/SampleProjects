@@ -81,6 +81,7 @@ namespace SampleProjects.Web.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+
             return View();
         }
 

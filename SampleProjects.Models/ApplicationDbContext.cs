@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Threading.Tasks;
 
 namespace SampleProjects.Models
 {
@@ -8,6 +10,7 @@ namespace SampleProjects.Models
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            _transaction = Database.BeginTransaction();
         }
 
         public ApplicationDbContext() : base()
@@ -29,5 +32,33 @@ namespace SampleProjects.Models
         public virtual DbSet<ProductPicture> ProductPictures { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+
+        private IDbContextTransaction _transaction;
+
+        public void BeginTransaction()
+        {
+            _transaction = Database.BeginTransaction();
+        }
+
+        public async Task<int> CommitAsync()
+        {
+            try
+            {
+                var result = await SaveChangesAsync();
+                _transaction.Commit();
+                return result;
+            }
+            finally
+            {
+                _transaction.Dispose();
+            }
+        }
+
+        public void Rollback()
+        {
+            _transaction.Rollback();
+            _transaction.Dispose();
+        }
+
     }
 }

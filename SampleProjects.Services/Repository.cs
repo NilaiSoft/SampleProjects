@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 using SampleProjects.Models;
+using SampleProjects.Services.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,33 +12,35 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Services
 {
-    public class Repository<TEntity, TModel> : IRepository<TEntity,TModel>
+    public class Repository<TEntity, TModel> : IRepository<TEntity, TModel>
         where TEntity : BaseEntity
     {
         protected ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         internal DbSet<TEntity> _dbSet;
 
-        public Repository(ApplicationDbContext context)
+        public Repository(ApplicationDbContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _dbSet = _context.Set<TEntity>();
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<int> AddAndSaveChangesAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
-            return await _context.SaveChangesAsync();
+            return await _unitOfWork.CompleteAsync();
         }
 
         public async Task<int> AddRangeAndSaveChangesAsync(IList<TEntity> entitys)
         {
             await _dbSet.AddRangeAsync(entitys);
-            return await _context.SaveChangesAsync();
+            return await _unitOfWork.CompleteAsync();
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            return await _context.SaveChangesAsync();
+            return await _unitOfWork.CompleteAsync();
         }
 
         public async Task<EntityEntry<TEntity>> AddAsync(TEntity item)
@@ -69,7 +72,7 @@ namespace SampleProjects.Services
                 if (entity == null) return 0;
 
                 _dbSet.Remove(entity);
-                return await _context.SaveChangesAsync();
+                return await SaveChangesAsync();
             }
             catch
             {
@@ -124,14 +127,14 @@ namespace SampleProjects.Services
             //_context.Entry<TEntity>(entity).State = EntityState.Modified;
             #endregion
             _dbSet.Update(entity);
-            return await _context.SaveChangesAsync();
+            return await _unitOfWork.CompleteAsync();
         }
 
         public async Task<int> EditAsync(Expression<Func<TEntity, TEntity>> predicate
             , Expression<Func<TEntity, TEntity>> entity)
         {
             this._context.Entry(predicate).CurrentValues.SetValues(entity);
-            return await _context.SaveChangesAsync();
+            return await _unitOfWork.CompleteAsync();
         }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem)
