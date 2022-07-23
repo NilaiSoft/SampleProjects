@@ -15,6 +15,11 @@ namespace SampleProjects.Models
 
         }
 
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+        //}
+
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<StateProvince> StateProvinces { get; set; }
         public virtual DbSet<Product> Products { get; set; }
