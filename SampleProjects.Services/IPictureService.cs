@@ -12,7 +12,7 @@ namespace SampleProjects.Services
 {
     public interface IPictureService
     {
-        Task<EntityEntry<Picture>> AddAsync(PictureModel item);
+        Task<EntityEntry<Picture>> AddAsync(Picture picture);
         Task<int> AddAndSaveChangesAsync(Picture entity);
         Task<int> EditAsync(Picture picture);
         Task<int> DeleteAsync(Expression<Func<Picture, bool>> _pridicate);

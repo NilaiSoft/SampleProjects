@@ -25,40 +25,9 @@ namespace SampleProjects.Services
             _productPictureRepository = productPictureRepository;
         }
 
-        public async Task<int> AddAndSaveChangesAsync(ProductModel model)
+        public async Task<int> AddAndSaveChangesAsync(Product product)
         {
-            var pictureModel = new PictureModel
-            {
-                AltAttribute = model.Name,
-                SeoFilename = model.Name,
-                TitleAttribute = model.Name,
-                IsNew = true,
-                MimeType = model.Name
-            };
-
-            var picture = await _pictureRepository.AddAsync(pictureModel);
-
-            var product = new Product
-            {
-                Deleted = false,
-                Description = model.Description,
-                Name = model.Name,
-                StockQuantity = model.StockQuantity,
-                UnitId = model.UnitId,
-            };
-
             var insertProduct = await _productRepository.AddAsync(product);
-
-            var pictureProduct = new ProductPicture
-            {
-                Picture = picture.Entity,
-                Product = insertProduct.Entity,
-                Visibled = true,
-                Deleted = false
-            };
-
-            await _productPictureRepository.AddAsync(pictureProduct);
-
             return await _productRepository.SaveChangesAsync();
         }
 
@@ -125,17 +94,8 @@ namespace SampleProjects.Services
             return await _productRepository.GetAsync(_pridicate, selectItem);
         }
 
-        public async Task<int> EditAsync(ProductModel model)
+        public async Task<int> EditAsync(Product product)
         {
-            var product = new Product
-            {
-                Description = model.Description,
-                StockQuantity = model.StockQuantity,
-                UnitId = model.UnitId,
-                Name = model.Name,
-                Id = model.Id
-            };
-
             return await _productRepository.EditAsync(product);
         }
     }

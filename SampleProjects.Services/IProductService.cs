@@ -13,8 +13,8 @@ namespace SampleProjects.Services
     public interface IProductService
     {
         Task<EntityEntry<Product>> AddAsync(Product item);
-        Task<int> AddAndSaveChangesAsync(ProductModel model);
-        Task<int> EditAsync(ProductModel product);
+        Task<int> AddAndSaveChangesAsync(Product model);
+        Task<int> EditAsync(Product product);
         Task<int> SaveChangesAsync();
         Task<int> DeleteAsync(Expression<Func<Product, bool>> _pridicate);
         Task<IList<Product>> GetsAsync(Expression<Func<Product, bool>> _pridicate);

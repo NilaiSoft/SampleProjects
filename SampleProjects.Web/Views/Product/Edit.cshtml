@@ -9,6 +9,14 @@
 
 <h4>Product</h4>
 <hr />
-@{
-	await Html.RenderPartialAsync("_CreateOrUpdate", Model);
-}
+<form asp-controller="Product" asp-action="Edit" method="post">
+    @{
+        await Html.RenderPartialAsync("_CreateOrUpdate", Model);
+    }
+    <div class="form-group">
+        <input type="submit" value="Update" class="btn btn-primary" />
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</form>

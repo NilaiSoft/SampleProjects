@@ -13,17 +13,25 @@ namespace SampleProjects.Web.Controllers
     public class ProductController : BaseController<Product, ProductModel>
     {
         private readonly IProductService _productService;
+        private readonly IPictureService _pictureService;
+        private readonly IProductPictureService _productPictureService;
+        private readonly IPictureBinaryService _pictureBinaryService;
         private readonly IUnitService _unitService;
         private readonly ILogger<ProductController> _logger;
+        private readonly IMapper _mapper;
 
         public ProductController(IProductService productService,
             IUnitService unitService, IMapper mapper
-            , IRepository<Product, ProductModel> repository, ILogger<ProductController> logger) : base(repository, mapper)
+            , IRepository<Product, ProductModel> repository, ILogger<ProductController> logger, IPictureService pictureService, IPictureBinaryService pictureBinaryService, IProductPictureService productPictureService) : base(repository, mapper)
         {
             _productService = productService;
             _unitService = unitService;
             _logger = logger;
             _logger.LogDebug(1, $"NLog injected into {nameof(ProductController)}");
+            _mapper = mapper;
+            _pictureService = pictureService;
+            _pictureBinaryService = pictureBinaryService;
+            _productPictureService = productPictureService;
         }
 
         public override async Task<IActionResult> Index()
@@ -41,10 +49,39 @@ namespace SampleProjects.Web.Controllers
         }
 
         [HttpPost]
-        public override async Task<IActionResult> Create(ProductModel entity)
+        public override async Task<IActionResult> Create(ProductModel pModel)
         {
-            await _productService.AddAndSaveChangesAsync(entity);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                var pEntity = _mapper.Map<Product>(pModel);
+                var product = await _productService.AddAsync(pEntity);
+
+                var picEntity = new Picture
+                {
+                    AltAttribute = pModel.Name,
+                    SeoFilename = pModel.Name,
+                    TitleAttribute = pModel.Name
+                };
+                var picture = await _pictureService.AddAsync(picEntity);
+
+                var picBinaryEntity = new PictureBinary
+                {
+                    Picture = picEntity
+                };
+                var pictureBinary = await _pictureBinaryService
+                    .AddAsync(picBinaryEntity);
+
+                var picProductEntity = new ProductPicture
+                {
+                    Product = pEntity,
+                    Picture = picEntity
+                };
+                var pictureProduct = await _productPictureService
+                    .AddAndSaveChangesAsync(picProductEntity);
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
 
         public override async Task<IActionResult> Edit(int id)
@@ -56,9 +93,10 @@ namespace SampleProjects.Web.Controllers
         }
 
         [HttpPost]
-        public override async Task<IActionResult> Edit(ProductModel entity)
+        public override async Task<IActionResult> Edit(ProductModel pModel)
         {
-            await _productService.EditAsync(entity);
+            var product = _mapper.Map<Product>(pModel);
+            await _productService.EditAsync(product);
             return RedirectToAction(nameof(Index));
         }
 

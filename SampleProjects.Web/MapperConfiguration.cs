@@ -25,6 +25,7 @@ namespace SampleProjects.Web
             CreateMap<Unit, UnitModel>();
             CreateMap<UnitModel, Unit>();
             CreateMap<City, CityModel>().ReverseMap();
+            CreateMap<Picture, PictureModel>().ReverseMap();
             CreateMap<StateProvince, StateProvinceModel>().ReverseMap();
         }
     }

@@ -26,25 +26,8 @@ namespace SampleProjects.Services
             return await _pictureRepository.AddAndSaveChangesAsync(entity);
         }
 
-        public async Task<EntityEntry<Picture>> AddAsync(PictureModel item)
+        public async Task<EntityEntry<Picture>> AddAsync(Picture picture)
         {
-            var picture = new Picture
-            {
-                SeoFilename = item.SeoFilename,
-                Deleted = false,
-                AltAttribute = item.AltAttribute,
-                IsNew = item.IsNew,
-                MimeType = item.MimeType,
-                TitleAttribute = item.TitleAttribute,
-                Visibled = true
-            };
-
-            var pic = await _pictureRepository.AddAsync(picture);
-            var picBin = new PictureBinary
-            {
-                Picture = pic.Entity
-            };
-            await _pictureBinaryRepository.AddAsync(picBin);
             return await _pictureRepository.AddAsync(picture);
         }
 
