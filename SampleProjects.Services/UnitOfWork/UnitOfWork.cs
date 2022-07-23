@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Services.UnitOfWork
 {
-    public class UnitOfWork : DbContext, IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationDbContext _dataContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public UnitOfWork(ApplicationDbContext dataContext)
+        public UnitOfWork(ApplicationDbContext dbContext)
         {
-            _dataContext = dataContext;
+            _dbContext = dbContext;
         }
 
         public async Task<int> CompleteAsync()
         {
-            return await _dataContext.CommitAsync();
+            return await _dbContext.CommitAsync();
         }
     }
 }

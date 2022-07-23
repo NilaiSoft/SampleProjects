@@ -50,15 +50,9 @@ namespace SampleProjects.Models
             }
             finally
             {
-                _transaction.Dispose();
+                await _transaction.RollbackAsync();
+                await _transaction.DisposeAsync();
             }
         }
-
-        public void Rollback()
-        {
-            _transaction.Rollback();
-            _transaction.Dispose();
-        }
-
     }
 }

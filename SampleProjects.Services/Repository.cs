@@ -16,31 +16,31 @@ namespace SampleProjects.Services
         where TEntity : BaseEntity
     {
         protected ApplicationDbContext _context;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _uow;
         internal DbSet<TEntity> _dbSet;
 
-        public Repository(ApplicationDbContext context, IUnitOfWork unitOfWork)
+        public Repository(ApplicationDbContext context, IUnitOfWork uow)
         {
             _context = context;
             _dbSet = _context.Set<TEntity>();
-            _unitOfWork = unitOfWork;
+            _uow = uow;
         }
 
         public async Task<int> AddAndSaveChangesAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
-            return await _unitOfWork.CompleteAsync();
+            return await _uow.CompleteAsync();
         }
 
         public async Task<int> AddRangeAndSaveChangesAsync(IList<TEntity> entitys)
         {
             await _dbSet.AddRangeAsync(entitys);
-            return await _unitOfWork.CompleteAsync();
+            return await _uow.CompleteAsync();
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            return await _unitOfWork.CompleteAsync();
+            return await _uow.CompleteAsync();
         }
 
         public async Task<EntityEntry<TEntity>> AddAsync(TEntity item)
@@ -127,14 +127,14 @@ namespace SampleProjects.Services
             //_context.Entry<TEntity>(entity).State = EntityState.Modified;
             #endregion
             _dbSet.Update(entity);
-            return await _unitOfWork.CompleteAsync();
+            return await _uow.CompleteAsync();
         }
 
         public async Task<int> EditAsync(Expression<Func<TEntity, TEntity>> predicate
             , Expression<Func<TEntity, TEntity>> entity)
         {
             this._context.Entry(predicate).CurrentValues.SetValues(entity);
-            return await _unitOfWork.CompleteAsync();
+            return await _uow.CompleteAsync();
         }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem)
