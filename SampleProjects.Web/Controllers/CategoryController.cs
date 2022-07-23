@@ -20,9 +20,9 @@ namespace SampleProjects.Web.Controllers
             _repository = repository;
         }
 
+        [HttpPost]
         public override Task<IActionResult> Create(CategoryMoedl entity)
         {
-
             return base.Create(entity);
         }
     }
