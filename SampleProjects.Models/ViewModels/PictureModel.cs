@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Models.ViewModels
 {
-    public class PictureModel
+    public class PictureModel: BaseViewModel
     {
         public string MimeType { get; set; }
         public string SeoFilename { get; set; }

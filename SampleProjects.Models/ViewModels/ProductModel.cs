@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Models.ViewModels
 {
-    public class ProductModel
+    public class ProductModel: BaseViewModel
     {
-        public int Id { get; set; }
         public string Name { get; set; }
+        public string UnitName { get; set; }
         public string Description { get; set; }
         public int StockQuantity { get; set; }
         public int UnitId { get; set; }

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Models.ViewModels
 {
-    public class PictureBinaryModel: BaseViewModel
+    public class BaseViewModel
     {
-        public byte[] BinaryData { get; set; }
-        public int PictureId { get; set; }
+        public int Id { get; set; }
     }
 }

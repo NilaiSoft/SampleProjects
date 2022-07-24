@@ -6,6 +6,8 @@ using SampleProjects.Models;
 using SampleProjects.Models.ViewModels;
 using SampleProjects.Services;
 using SampleProjects.Web.BaseController;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SampleProjects.Web.Controllers
@@ -38,7 +40,16 @@ namespace SampleProjects.Web.Controllers
         {
             _logger.LogInformation(nameof(Index));
             var products = await _productService.GetsAsync();
-            return View(products);
+            var model = _mapper.Map<IList<ProductModel>>(products);
+            var unitIds = model.ToList().Select(x => x.UnitId);
+            var units = await _unitService.GetsAsync(x => unitIds.Contains(x.Id));
+            
+            foreach (var item in model)
+            {
+                item.UnitName = units.FirstOrDefault(x => x.Id == item.UnitId).Name;
+            }
+
+            return View(model);
         }
 
         public override async Task<IActionResult> Create()

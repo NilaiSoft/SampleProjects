@@ -23,7 +23,8 @@ namespace SampleProjects.Web.BaseController
 
         public virtual async Task<IActionResult> Index()
         {
-            var model = await _repository.GetsAsync();
+            var entity = await _repository.GetsAsync();
+            var model = _mapper.Map<IList<TVModel>>(entity);
             return View(model);
         }
 

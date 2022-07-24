@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Models.ViewModels
 {
-    public class ProductCategoryModel
+    public class ProductCategoryModel: BaseViewModel
     {
         public int ProductId { get; set; }
         public int CategoryId { get; set; }

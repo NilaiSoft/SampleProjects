@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Models.ViewModels
 {
-    public class UnitModel
+    public class UnitModel: BaseViewModel
     {
         public string Name { get; set; }
     }

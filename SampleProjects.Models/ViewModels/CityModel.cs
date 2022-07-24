@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Models.ViewModels
 {
-    public class CityModel
+    public class CityModel: BaseViewModel
     {
         public string Name { get; set; }
         public int StateProvinceId { get; set; }
