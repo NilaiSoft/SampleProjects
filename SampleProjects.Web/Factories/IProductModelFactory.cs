@@ -10,5 +10,6 @@ namespace SampleProjects.Web.Factories
     public interface IProductModelFactory
     {
         Task<IList<ProductModel>> PrepareProductAsync(IList<Product> products);
+        Task<ProductModel> PrepareProductModelAsync(ProductModel model, Product product);
     }
 }

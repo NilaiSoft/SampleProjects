@@ -109,17 +109,12 @@ namespace SampleProjects.Web.Controllers
 
         public override async Task<IActionResult> Details(int id)
         {
-            var product = await _productService.GetAsync(x => x.Id == id,
-            x => new Product
-            {
-                Description = x.Description,
-                Id = x.Id,
-                Name = x.Name,
-                StockQuantity = x.StockQuantity,
-                UnitId = x.UnitId,
-                Unit = x.Unit
-            });
-            return View(product);
+            var product = await _productService.GetAsync(x => x.Id == id);
+
+            var model = await _productModelFactory
+                .PrepareProductModelAsync(null, product);
+
+            return View(model);
         }
     }
 }

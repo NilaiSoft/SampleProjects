@@ -12,12 +12,14 @@ namespace SampleProjects.Web.Factories
     public class ProductModelFactory : IProductModelFactory
     {
         private readonly IUnitService _unitService;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
-        public ProductModelFactory(IUnitService unitService, IMapper mapper)
+        public ProductModelFactory(IUnitService unitService, IMapper mapper, IProductService productService)
         {
             _unitService = unitService;
             _mapper = mapper;
+            _productService = productService;
         }
 
         public async Task<IList<ProductModel>> PrepareProductAsync(IList<Product> products)
@@ -32,6 +34,29 @@ namespace SampleProjects.Web.Factories
             }
 
             return model;
+        }
+
+        public async Task<ProductModel> PrepareProductModelAsync(ProductModel model, Product product)
+        {
+            product = await _productService.GetAsync(x => x.Id == product.Id,
+                x => new Product
+                {
+                    Description = x.Description,
+                    Id = x.Id,
+                    Name = x.Name,
+                    StockQuantity = x.StockQuantity,
+                    Unit = x.Unit
+                });
+
+            return new ProductModel
+            {
+                Description = product.Description,
+                Id = product.Id,
+                Name = product.Name,
+                StockQuantity = product.StockQuantity,
+                UnitId = product.UnitId,
+                UnitName = product.Unit.Name
+            };
         }
     }
 }
