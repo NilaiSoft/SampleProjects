@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Web.BaseController
 {
-    [Area(AreaNames.Admin)]
     public class BaseController<TEntity, TVModel> : Controller,
         IBaseController<TEntity, TVModel> where TEntity : BaseEntity
     {
