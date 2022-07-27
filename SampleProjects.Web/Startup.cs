@@ -75,7 +75,7 @@ namespace SampleProjects.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
             app.ExceptionHandler();

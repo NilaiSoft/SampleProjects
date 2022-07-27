@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SampleProjects.Web.Controllers
+namespace SampleProjects.Web.Admin.Controllers
 {
     public class CategoryController : BaseController<Category, CategoryMoedl>
     {

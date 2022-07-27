@@ -7,11 +7,9 @@ using SampleProjects.Models.ViewModels;
 using SampleProjects.Services;
 using SampleProjects.Web.BaseController;
 using SampleProjects.Web.Factories;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace SampleProjects.Web.Controllers
+namespace SampleProjects.Web.Admin.Controllers
 {
     public class ProductController : BaseController<Product, ProductModel>
     {
