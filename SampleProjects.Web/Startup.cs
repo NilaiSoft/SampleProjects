@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using SampleProjects.Framework.Infrastructure;
 using SampleProjects.Models;
 using SampleProjects.Web.Configs;
+using SampleProjects.Web.Infrastructure;
 
 namespace SampleProjects.Web
 {
@@ -39,6 +40,7 @@ namespace SampleProjects.Web
             services.AddRazorPages();
 
             services.Register();
+            services.WebRegister();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

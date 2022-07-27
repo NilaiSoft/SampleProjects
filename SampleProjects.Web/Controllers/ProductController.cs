@@ -6,6 +6,7 @@ using SampleProjects.Models;
 using SampleProjects.Models.ViewModels;
 using SampleProjects.Services;
 using SampleProjects.Web.BaseController;
+using SampleProjects.Web.Factories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace SampleProjects.Web.Controllers
         private readonly IProductService _productService;
         private readonly IPictureService _pictureService;
         private readonly IProductPictureService _productPictureService;
+        private readonly IProductModelFactory _productModelFactory;
         private readonly IPictureBinaryService _pictureBinaryService;
         private readonly IUnitService _unitService;
         private readonly ILogger<ProductController> _logger;
@@ -24,7 +26,7 @@ namespace SampleProjects.Web.Controllers
 
         public ProductController(IProductService productService,
             IUnitService unitService, IMapper mapper
-            , IRepository<Product, ProductModel> repository, ILogger<ProductController> logger, IPictureService pictureService, IPictureBinaryService pictureBinaryService, IProductPictureService productPictureService) : base(repository, mapper)
+            , IRepository<Product, ProductModel> repository, ILogger<ProductController> logger, IPictureService pictureService, IPictureBinaryService pictureBinaryService, IProductPictureService productPictureService, IProductModelFactory productModelFactory) : base(repository, mapper)
         {
             _productService = productService;
             _unitService = unitService;
@@ -34,21 +36,14 @@ namespace SampleProjects.Web.Controllers
             _pictureService = pictureService;
             _pictureBinaryService = pictureBinaryService;
             _productPictureService = productPictureService;
+            _productModelFactory = productModelFactory;
         }
 
         public override async Task<IActionResult> Index()
         {
             _logger.LogInformation(nameof(Index));
             var products = await _productService.GetsAsync();
-            var model = _mapper.Map<IList<ProductModel>>(products);
-            var unitIds = model.ToList().Select(x => x.UnitId);
-            var units = await _unitService.GetsAsync(x => unitIds.Contains(x.Id));
-            
-            foreach (var item in model)
-            {
-                item.UnitName = units.FirstOrDefault(x => x.Id == item.UnitId).Name;
-            }
-
+            var model = await _productModelFactory.PrepareProductAsync(products);
             return View(model);
         }
 

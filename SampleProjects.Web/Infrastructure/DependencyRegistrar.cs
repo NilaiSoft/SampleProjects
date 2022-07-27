@@ -4,26 +4,24 @@ using SampleProjects.Services.UnitOfWork;
 using System;
 using System.Linq;
 
-namespace SampleProjects.Framework.Infrastructure
+namespace SampleProjects.Web.Infrastructure
 {
     public static class DependencyRegistrar
     {
-        public static void Register(this IServiceCollection services)
+        public static void WebRegister(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             var appServices = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes())
-                .Where(t => (t.FullName.EndsWith("Service") || t.FullName.EndsWith("ModelFactory"))
+                .Where(t => t.FullName.EndsWith("ModelFactory") 
+                && t.FullName.StartsWith("SampleProjects.Web.Factories")
                 && (t.IsClass || t.IsInterface))
                 .Select(x => x);
 
             appServices = appServices
-                .Where(x => x.FullName.StartsWith("SampleProjects.Services"));
+                .Where(x => x.FullName.StartsWith("SampleProjects.Web.Factories"));
 
             foreach (var IService in appServices
-                .Where(x => x.FullName.StartsWith("SampleProjects.Services")))
+                .Where(x => x.FullName.StartsWith("SampleProjects.Web.Factories")))
             {
                 var Service = appServices.FirstOrDefault
                     (x => x.Name == IService.Name.Substring
