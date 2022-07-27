@@ -58,5 +58,28 @@ namespace SampleProjects.Web.Factories
                 UnitName = product.Unit.Name
             };
         }
+
+        public async Task<ProductModel> PrepareProductModelAsync(int ProductId)
+        {
+            var product = await _productService.GetAsync(x => x.Id == ProductId,
+                x => new Product
+                {
+                    Description = x.Description,
+                    Id = x.Id,
+                    Name = x.Name,
+                    StockQuantity = x.StockQuantity,
+                    Unit = x.Unit
+                });
+
+            return new ProductModel
+            {
+                Description = product.Description,
+                Id = product.Id,
+                Name = product.Name,
+                StockQuantity = product.StockQuantity,
+                UnitId = product.UnitId,
+                UnitName = product.Unit.Name
+            };
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace SampleProjects.Web.Factories
     {
         Task<IList<ProductModel>> PrepareProductAsync(IList<Product> products);
         Task<ProductModel> PrepareProductModelAsync(ProductModel model, Product product);
+        Task<ProductModel> PrepareProductModelAsync(int productId);
     }
 }
