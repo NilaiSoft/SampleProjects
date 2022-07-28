@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AdminMapperConfiguration\**" />
     <Compile Remove="Models\**" />
+    <Content Remove="AdminMapperConfiguration\**" />
     <Content Remove="Models\**" />
+    <EmbeddedResource Remove="AdminMapperConfiguration\**" />
     <EmbeddedResource Remove="Models\**" />
+    <None Remove="AdminMapperConfiguration\**" />
     <None Remove="Models\**" />
   </ItemGroup>
 
@@ -33,10 +37,6 @@
     <ProjectReference Include="..\SampleProjects.Framework\SampleProjects.Framework.csproj" />
     <ProjectReference Include="..\SampleProjects.Models\SampleProjects.Models.csproj" />
     <ProjectReference Include="..\SampleProjects.Services\SampleProjects.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="AdminMapperConfiguration\" />
   </ItemGroup>
 
   <ItemGroup>
