@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Web.BaseController
 {
+    [Area("store")]
     public class BaseController<TEntity, TVModel> : Controller,
         IBaseController<TEntity, TVModel> where TEntity : BaseEntity
     {

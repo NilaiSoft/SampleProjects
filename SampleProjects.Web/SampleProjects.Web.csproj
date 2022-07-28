@@ -30,7 +30,6 @@
     <None Include="Views\Product\_CreateOrUpdate.cshtml" />
     <None Include="Views\Product\_CreateOrUpdate.Info.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Views\Shared\_MainMenu.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Views\StateProvince\Create.cshtml" />
     <None Include="Views\StateProvince\Index.cshtml" />

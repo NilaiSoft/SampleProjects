@@ -83,6 +83,15 @@ namespace SampleProjects.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+                endpoints.MapControllerRoute(name: "Home",
+                    pattern: "Store/Home/Index",
+                    defaults: new { controller = "Home", action = "Index" });
+
+
+                //endpoints.MapControllerRoute(
+                //    name: "Homepage",
+                //    pattern: "{controller=Home}/{action=Index}");
+
                 endpoints.MapRazorPages();
             });
 
