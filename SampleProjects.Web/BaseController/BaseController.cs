@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SampleProjects.Web.Admin.BaseController
+namespace SampleProjects.Web.BaseController
 {
     public class BaseController<TEntity, TVModel> : Controller,
         IBaseController<TEntity, TVModel> where TEntity : BaseEntity

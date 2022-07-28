@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SampleProjects.Models;
 
-namespace SampleProjects.Web.Admin.BaseController
+namespace SampleProjects.Web.BaseController
 {
     public interface IBaseController<TEntity, TVModel>
         where TEntity : BaseEntity
