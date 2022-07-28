@@ -84,7 +84,7 @@ namespace SampleProjects.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(name: "Home",
-                    pattern: "Store/Home/Index",
+                    pattern: "Store",
                     defaults: new { controller = "Home", action = "Index" });
 
 
