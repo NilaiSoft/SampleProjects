@@ -37,7 +37,6 @@
 
   <ItemGroup>
     <Folder Include="AdminMapperConfiguration\" />
-    <Folder Include="Areas\Admin\Infrastructure\Mapper\" />
   </ItemGroup>
 
   <ItemGroup>
