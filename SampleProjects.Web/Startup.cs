@@ -37,6 +37,7 @@ namespace SampleProjects.Web
             .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAutoMapper();
 
+            services.AddControllersWithViews();
             services.AddRazorPages();
 
             services.Register();

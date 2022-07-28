@@ -18,6 +18,31 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Category\Create.cshtml" />
+    <None Include="Views\Category\Edit.cshtml" />
+    <None Include="Views\Category\Index.cshtml" />
+    <None Include="Views\City\Create.cshtml" />
+    <None Include="Views\City\Index.cshtml" />
+    <None Include="Views\Product\Create.cshtml" />
+    <None Include="Views\Product\Details.cshtml" />
+    <None Include="Views\Product\Edit.cshtml" />
+    <None Include="Views\Product\Index.cshtml" />
+    <None Include="Views\Product\_CreateOrUpdate.cshtml" />
+    <None Include="Views\Product\_CreateOrUpdate.Info.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_MainMenu.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\StateProvince\Create.cshtml" />
+    <None Include="Views\StateProvince\Index.cshtml" />
+    <None Include="Views\Unit\Create.cshtml" />
+    <None Include="Views\Unit\Details.cshtml" />
+    <None Include="Views\Unit\Edit.cshtml" />
+    <None Include="Views\Unit\Index.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />

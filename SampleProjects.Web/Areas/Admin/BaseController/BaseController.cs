@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Web.Admin.BaseController
 {
-    [Area("Admin")]
+    [Area("admin")]
     public class AdminBaseController<TEntity, TVModel> : Controller,
         IAdminBaseController<TEntity, TVModel> where TEntity : BaseEntity
     {
