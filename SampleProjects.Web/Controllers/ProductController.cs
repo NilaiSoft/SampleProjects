@@ -70,12 +70,8 @@ namespace SampleProjects.Web.Controllers
                 };
                 var picture = await _pictureService.AddAsync(picEntity);
 
-                var picBinaryEntity = new PictureBinary
-                {
-                    Picture = picEntity
-                };
                 var pictureBinary = await _pictureBinaryService
-                    .AddAsync(picBinaryEntity);
+                    .AddAsync(picEntity, pModel.ImageFile);
 
                 var picProductEntity = new ProductPicture
                 {

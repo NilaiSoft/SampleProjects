@@ -13,13 +13,19 @@ namespace SampleProjects.Web.Factories
     {
         private readonly IUnitService _unitService;
         private readonly IProductService _productService;
+        private readonly IPictureService _pictureService;
+        private readonly IPictureBinaryService _pictureBinaryService;
+        private readonly IProductPictureService _productPicture;
         private readonly IMapper _mapper;
 
-        public ProductModelFactory(IUnitService unitService, IMapper mapper, IProductService productService)
+        public ProductModelFactory(IUnitService unitService, IMapper mapper, IProductService productService, IProductPictureService productPicture, IPictureBinaryService pictureBinaryService, IPictureService pictureService)
         {
             _unitService = unitService;
             _mapper = mapper;
             _productService = productService;
+            _productPicture = productPicture;
+            _pictureBinaryService = pictureBinaryService;
+            _pictureService = pictureService;
         }
 
         public async Task<IList<ProductModel>> PrepareProductAsync(IList<Product> products)
@@ -48,6 +54,8 @@ namespace SampleProjects.Web.Factories
                     Unit = x.Unit
                 });
 
+            var test = await _productPicture.GetAsync(x => x.ProductId == product.Id);
+            var test2 = await _pictureBinaryService.GetAsync(x => x.PictureId == test.Id);
             return new ProductModel
             {
                 Description = product.Description,
@@ -70,6 +78,9 @@ namespace SampleProjects.Web.Factories
                     StockQuantity = x.StockQuantity,
                     Unit = x.Unit
                 });
+
+            var test = await _productPicture.GetAsync(x => x.ProductId == product.Id);
+            var test2 = await _pictureBinaryService.GetAsync(x => x.PictureId == test.Id);
 
             return new ProductModel
             {

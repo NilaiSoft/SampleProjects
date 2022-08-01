@@ -72,22 +72,7 @@ namespace SampleProjects.Web.Admin.Controllers
                 };
                 var picture = await _pictureService.AddAsync(picEntity);
 
-                var picBinaryEntity = new PictureBinary
-                {
-                    Picture = picEntity
-                };
-
-                if (pModel.ImageFile.ContentType.ToLower().StartsWith("image/"))
-                {
-                    using (BinaryReader br = new BinaryReader(pModel.ImageFile.OpenReadStream()))
-                    {
-                        picBinaryEntity.BinaryData = br.ReadBytes((int)pModel.ImageFile.OpenReadStream().Length);
-                    }
-                    Response.StatusCode = 200;
-                }
-
-                var pictureBinary = await _pictureBinaryService
-                    .AddAsync(picBinaryEntity);
+                await _pictureBinaryService.AddAsync(picture.Entity, pModel.ImageFile);
 
                 var picProductEntity = new ProductPicture
                 {

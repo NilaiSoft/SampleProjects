@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SampleProjects.Models;
 using SampleProjects.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -19,14 +21,30 @@ namespace SampleProjects.Services
             _pictureBinaryRepository = pictureBinaryRepository;
         }
 
-        public async Task<int> AddAndSaveChangesAsync(PictureBinary entity)
+        public async Task<int> AddAndSaveChangesAsync(PictureBinary pictureBinary, IFormFile formFile)
         {
-            return await _pictureBinaryRepository.AddAndSaveChangesAsync(entity);
+            if (formFile.ContentType.ToLower().StartsWith("image/"))
+            {
+                using (BinaryReader br = new BinaryReader(formFile.OpenReadStream()))
+                {
+                    pictureBinary.BinaryData = br.ReadBytes((int)formFile.OpenReadStream().Length);
+                }
+            }
+            return await _pictureBinaryRepository.AddAndSaveChangesAsync(pictureBinary);
         }
 
-        public async Task<EntityEntry<PictureBinary>> AddAsync(PictureBinary item)
+        public async Task<EntityEntry<PictureBinary>> AddAsync(Picture picture, IFormFile formFile)
         {
-            return await _pictureBinaryRepository.AddAsync(item);
+            var pictureBinary = new PictureBinary();
+            if (formFile.ContentType.ToLower().StartsWith("image/"))
+            {
+                using (BinaryReader br = new BinaryReader(formFile.OpenReadStream()))
+                {
+                    pictureBinary.BinaryData = br.ReadBytes((int)formFile.OpenReadStream().Length);
+                }
+                pictureBinary.Picture = picture;
+            }
+            return await _pictureBinaryRepository.AddAsync(pictureBinary);
         }
 
         public async Task<bool> AnyAsync(Expression<Func<PictureBinary, bool>> expression)

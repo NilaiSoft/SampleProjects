@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SampleProjects.Models;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace SampleProjects.Services
 {
     public interface IPictureBinaryService
     {
-        Task<EntityEntry<PictureBinary>> AddAsync(PictureBinary item);
-        Task<int> AddAndSaveChangesAsync(PictureBinary entity);
+        Task<EntityEntry<PictureBinary>> AddAsync(Picture picture, IFormFile formFile);
+        Task<int> AddAndSaveChangesAsync(PictureBinary entity, IFormFile formFile);
         Task<int> EditAsync(PictureBinary pictureBinary);
         Task<int> DeleteAsync(Expression<Func<PictureBinary, bool>> _pridicate);
         Task<IList<PictureBinary>> GetsAsync(Expression<Func<PictureBinary, bool>> _pridicate);
