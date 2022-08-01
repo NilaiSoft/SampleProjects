@@ -1,156 +1,233 @@
-﻿<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ustora Demo</title>
+﻿<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-    <!-- Google Fonts -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <link href="~/Ustora/css/Titillium.css" rel="stylesheet" />
-    <link href="~/Ustora/css/Roboto.css" rel="stylesheet" />
-    <link href="~/Ustora/css/Raleway.css" rel="stylesheet" />
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="~/Ustora/css/bootstrap.min.css">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Simple Ecommerce</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/Ustora/css/font-awesome.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="~/Ustora/css/owl.carousel.css">
-    <link rel="stylesheet" href="~/Ustora/styleUstora.css">
-    <link rel="stylesheet" href="~/Ustora/css/responsive.css">
-</head>
-<body>
-    <div class="header-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="user-menu">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="~/Ustora/cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="~/Ustora/checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div> <!-- End header area -->
-
-    <div class="site-branding-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="logo">
-                        <h1><a href="./"><img src="~/Ustora/img/logo.png"></a></h1>
-                    </div>
-                </div>
-
-                <div class="col-sm-6">
-                    <div class="shopping-item">
-                        <a href="~/Ustora/cart.html">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- End site branding area -->
-
-    <div class="mainmenu-area">
-        <div class="container">
-            <div class="row">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="~/Ustora/index.html">Home</a></li>
-                        <li><a href="~/Ustora/shop.html">Shop page</a></li>
-                        <li><a href="~/Ustora/single-product.html">Single product</a></li>
-                        <li><a href="~/Ustora/cart.html">Cart</a></li>
-                        <li><a href="~/Ustora/checkout.html">Checkout</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div> <!-- End mainmenu area -->
-
-    <div class="slider-area">
-        <!-- Slider -->
-        <div class="block-slider block-slider4">
-            <ul class="" id="bxslider-home4">
-                <li>
-                    <img src="~/Ustora/img/h4-slide.png" alt="Slide">
-                    <div class="caption-group">
-                        <h2 class="caption title">
-                            iPhone <span class="primary">6 <strong>Plus</strong></span>
-                        </h2>
-                        <h4 class="caption subtitle">Dual SIM</h4>
-                        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                    </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
                 </li>
-                <li>
-                    <img src="~/Ustora/img/h4-slide2.png" alt="Slide">
-                    <div class="caption-group">
-                        <h2 class="caption title">
-                            by one, get one <span class="primary">50% <strong>off</strong></span>
-                        </h2>
-                        <h4 class="caption subtitle">school supplies & backpacks.*</h4>
-                        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                    </div>
+                <li class="nav-item active">
+                    <a class="nav-link" href="category.html">Categories <span class="sr-only">(current)</span></a>
                 </li>
-                <li>
-                    <img src="~/Ustora/img/h4-slide3.png" alt="Slide">
-                    <div class="caption-group">
-                        <h2 class="caption title">
-                            Apple <span class="primary">Store <strong>Ipod</strong></span>
-                        </h2>
-                        <h4 class="caption subtitle">Select Item</h4>
-                        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="product.html">Product</a>
                 </li>
-                <li>
-                    <img src="~/Ustora/img/h4-slide4.png" alt="Slide">
-                    <div class="caption-group">
-                        <h2 class="caption title">
-                            Apple <span class="primary">Store <strong>Ipod</strong></span>
-                        </h2>
-                        <h4 class="caption subtitle">& Phone</h4>
-                        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
                 </li>
             </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <a class="btn btn-success btn-sm ml-3" href="cart.html">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                    <span class="badge badge-light">3</span>
+                </a>
+            </form>
         </div>
-        <!-- ./Slider -->
-    </div> <!-- End slider area -->
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">E-COMMERCE CATEGORY</h1>
+        <p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte...</p>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="category.html">Category</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Sub-category</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-3">
+            <div class="card bg-light mb-3">
+                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
+                <ul class="list-group category_block">
+                    <li class="list-group-item"><a href="category.html">Cras justo odio</a></li>
+                    <li class="list-group-item"><a href="category.html">Dapibus ac facilisis in</a></li>
+                    <li class="list-group-item"><a href="category.html">Morbi leo risus</a></li>
+                    <li class="list-group-item"><a href="category.html">Porta ac consectetur ac</a></li>
+                    <li class="list-group-item"><a href="category.html">Vestibulum at eros</a></li>
+                </ul>
+            </div>
+            <div class="card bg-light mb-3">
+                <div class="card-header bg-success text-white text-uppercase">Last product</div>
+                <div class="card-body">
+                    <img class="img-fluid" src="https://dummyimage.com/600x400/55595c/fff" />
+                    <h5 class="card-title">Product title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="bloc_left_price">99.00 $</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="btn btn-danger btn-block">99.00 $</p>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="btn btn-danger btn-block">99.00 $</p>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="btn btn-danger btn-block">99.00 $</p>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="btn btn-danger btn-block">99.00 $</p>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="btn btn-danger btn-block">99.00 $</p>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="btn btn-danger btn-block">99.00 $</p>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
 
+    </div>
+</div>
 
-    @await Component.InvokeAsync("ProductList")
-
-    <!-- Latest jQuery form server -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap JS form CDN -->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- jQuery sticky menu -->
-    <script src="~/Ustora/js/owl.carousel.min.js"></script>
-    <script src="~/Ustora/js/jquery.sticky.js"></script>
-    <!-- jQuery easing -->
-    <script src="~/Ustora/js/jquery.easing.1.3.min.js"></script>
-    <!-- Main Script -->
-    <script src="~/Ustora/js/main.js"></script>
-    <!-- Slider -->
-    <script src="~/Ustora/js/bxslider.min.js"></script>
-    <script src="~/Ustora/js/script.slider.js"></script>
-</body>
-</html>
+<!-- Footer -->
+<footer class="text-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-lg-4 col-xl-3">
+                <h5>About</h5>
+                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                <p class="mb-0">
+                    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

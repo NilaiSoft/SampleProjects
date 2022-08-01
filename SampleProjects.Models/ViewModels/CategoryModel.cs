@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Models.ViewModels
 {
-    public class CategoryMoedl : BaseViewModel
+    public class CategoryModel : BaseViewModel
     {
         public string Name { get; set; }
         public Picture Picture { get; set; }
