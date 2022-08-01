@@ -12,14 +12,14 @@ namespace SampleProjects.Services
     public interface ICategoryService
     {
         Task<EntityEntry<Category>> AddAsync(Category item);
-        Task<int> AddAndSaveChangesAsync(Category entity);
+        Task<int> AddAndSaveChangesAsync(Category category);
         Task<int> EditAsync(Category category);
         Task<int> DeleteAsync(Expression<Func<Category, bool>> _pridicate);
         Task<IList<Category>> GetsAsync(Expression<Func<Category, bool>> _pridicate);
         Task<IList<Category>> GetsAsync();
         Task<Category> GetAsync(Expression<Func<Category, bool>> _pridicate);
-        Task<Category> FindAsync(Expression<Func<Category, bool>> predicate);
-        Task<bool> AnyAsync(Expression<Func<Category, bool>> expression);
+        Task<Category> FindAsync(Expression<Func<Category, bool>> _predicate);
+        Task<bool> AnyAsync(Expression<Func<Category, bool>> _predicate);
         Task<bool> AnyAsync();
     }
 }

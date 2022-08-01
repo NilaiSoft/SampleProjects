@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace SampleProjects.Web.Controllers
 {
-    public class CategoryController : BaseController<Category, CategoryMoedl>
+    public class CategoryController : BaseController<Category, CategoryModel>
     {
-        private readonly IRepository<Category, CategoryMoedl> _repository;
-        public CategoryController(IRepository<Category, CategoryMoedl> repository, IMapper mapper)
+        private readonly IRepository<Category, CategoryModel> _repository;
+        public CategoryController(IRepository<Category, CategoryModel> repository, IMapper mapper)
             : base(repository, mapper)
         {
             _repository = repository;
         }
 
         [HttpPost]
-        public override Task<IActionResult> Create(CategoryMoedl entity)
+        public override Task<IActionResult> Create(CategoryModel entity)
         {
             return base.Create(entity);
         }

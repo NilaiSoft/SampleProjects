@@ -12,9 +12,9 @@ namespace SampleProjects.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly IRepository<Category, CategoryMoedl> _categoryRepository;
+        private readonly IRepository<Category, CategoryModel> _categoryRepository;
 
-        public CategoryService(IRepository<Category, CategoryMoedl> categoryRepository)
+        public CategoryService(IRepository<Category, CategoryModel> categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }

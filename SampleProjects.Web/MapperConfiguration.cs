@@ -13,12 +13,12 @@ namespace SampleProjects.Web
         }
         protected virtual void CreateConfigMaps()
         {
-            CreateMap<Category, CategoryMoedl>();
+            CreateMap<Category, CategoryModel>();
 
             //CreateMap<Category, CategoryMoedl>().ReverseMap();
 
 
-            CreateMap<CategoryMoedl, Category>();
+            CreateMap<CategoryModel, Category>();
             CreateMap<ProductModel, Product>().ReverseMap();
             CreateMap<PictureBinary, PictureBinaryModel>();
             CreateMap<PictureBinaryModel, PictureBinary>();
