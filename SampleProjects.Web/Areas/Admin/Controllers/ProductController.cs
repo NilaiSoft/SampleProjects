@@ -9,6 +9,7 @@ using SampleProjects.Web.Admin.BaseController;
 using SampleProjects.Web.BaseController;
 using SampleProjects.Web.Factories;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -75,6 +76,16 @@ namespace SampleProjects.Web.Admin.Controllers
                 {
                     Picture = picEntity
                 };
+
+                if (pModel.ImageFile.ContentType.ToLower().StartsWith("image/"))
+                {
+                    using (BinaryReader br = new BinaryReader(pModel.ImageFile.OpenReadStream()))
+                    {
+                        picBinaryEntity.BinaryData = br.ReadBytes((int)pModel.ImageFile.OpenReadStream().Length);
+                    }
+                    Response.StatusCode = 200;
+                }
+
                 var pictureBinary = await _pictureBinaryService
                     .AddAsync(picBinaryEntity);
 
