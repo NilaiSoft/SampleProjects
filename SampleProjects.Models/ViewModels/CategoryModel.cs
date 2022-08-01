@@ -10,6 +10,7 @@ namespace SampleProjects.Models.ViewModels
     public class CategoryModel : BaseViewModel
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public Picture Picture { get; set; }
         public int PictureId { get; set; }
         public IFormFile ImageFile { get; set; }

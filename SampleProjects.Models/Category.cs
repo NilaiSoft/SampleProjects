@@ -16,6 +16,11 @@ namespace SampleProjects.Models
         public string Name { get; set; }
 
         /// <summary>
+        /// Descriptions
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Picture for category
         /// </summary>
         [ForeignKey(nameof(PictureId))]
