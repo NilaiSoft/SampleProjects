@@ -1,0 +1,44 @@
+﻿@model SampleProjects.Models.ViewModels.ProductModel
+
+<section class="content">
+	<div class="container-fluid">
+		<div class="form-horizontal">
+			<div class="row">
+				<div class="col-md-4">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<input type="hidden" asp-for="Id" />
+					<div class="form-group">
+						<label asp-for="Name" class="control-label"></label>
+						<input asp-for="Name" class="form-control" />
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="StockQuantity" class="control-label"></label>
+						<input asp-for="StockQuantity" class="form-control" />
+						<span asp-validation-for="StockQuantity" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="UnitId" class="control-label"></label>
+						<select asp-for="UnitId" class="form-control" asp-items="ViewBag.UnitList">
+							<option value="">---انتخاب واحد اندازه گیری---</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label asp-for="Description" class="control-label"></label>
+						<input asp-for="Description" class="form-control" />
+						<span asp-validation-for="Description" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="custom-file">
+								<label asp-for="ImageFile" class="custom-file-label"></label>
+								<input asp-for="ImageFile" id="files" class="custom-file-input" type="file" />
+								<span asp-validation-for="ImageFile" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
