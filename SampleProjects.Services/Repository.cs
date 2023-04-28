@@ -1,46 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.Extensions.Logging;
-using SampleProjects.Models;
-using SampleProjects.Services.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SampleProjects.Services
+﻿namespace SampleProjects.Services
 {
     public class Repository<TEntity, TModel> : IRepository<TEntity, TModel>
         where TEntity : BaseEntity
     {
         protected ApplicationDbContext _context;
-        private readonly IUnitOfWork _uow;
+        //private readonly IUnitOfWork _uow;
         internal DbSet<TEntity> _dbSet;
 
-        public Repository(ApplicationDbContext context, IUnitOfWork uow)
+        public Repository(ApplicationDbContext context)
         {
             _context = context;
             _dbSet = _context.Set<TEntity>();
-            _uow = uow;
         }
 
         public async Task<int> AddAndSaveChangesAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
-            return await _uow.CompleteAsync();
+            return 1;
         }
 
         public async Task<int> AddRangeAndSaveChangesAsync(IList<TEntity> entitys)
         {
             await _dbSet.AddRangeAsync(entitys);
-            return await _uow.CompleteAsync();
+            return 1;
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            return await _uow.CompleteAsync();
+            return 1;
         }
 
         public async Task<EntityEntry<TEntity>> AddAsync(TEntity item)
@@ -127,14 +114,14 @@ namespace SampleProjects.Services
             //_context.Entry<TEntity>(entity).State = EntityState.Modified;
             #endregion
             _dbSet.Update(entity);
-            return await _uow.CompleteAsync();
+            return 1;
         }
 
         public async Task<int> EditAsync(Expression<Func<TEntity, TEntity>> predicate
             , Expression<Func<TEntity, TEntity>> entity)
         {
             _context.Entry(predicate).CurrentValues.SetValues(entity);
-            return await _uow.CompleteAsync();
+            return 1;
         }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem)

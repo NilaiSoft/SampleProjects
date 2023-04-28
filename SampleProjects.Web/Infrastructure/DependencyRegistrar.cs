@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SampleProjects.Services;
-using SampleProjects.Services.UnitOfWork;
 using System;
 using System.Linq;
 

@@ -1,0 +1,11 @@
+﻿global using SampleProjects.Models;
+global using SampleProjects.Models.ViewModels;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Linq.Expressions;
+global using System.Threading.Tasks;
+global using Microsoft.Extensions.DependencyInjection;
+global using SampleProjects.Services;

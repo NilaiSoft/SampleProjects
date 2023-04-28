@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SampleProjects.Services;
-using SampleProjects.Services.UnitOfWork;
 using System;
 using System.Linq;
 
@@ -11,7 +10,6 @@ namespace SampleProjects.Framework.Infrastructure
         public static void Register(this IServiceCollection services)
         {
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var appServices = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes())
