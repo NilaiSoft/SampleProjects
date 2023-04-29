@@ -16,18 +16,18 @@
         public async Task<int> AddAndSaveChangesAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
-            return 1;
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<int> AddRangeAndSaveChangesAsync(IList<TEntity> entitys)
         {
             await _dbSet.AddRangeAsync(entitys);
-            return 1;
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            return 1;
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<EntityEntry<TEntity>> AddAsync(TEntity item)
@@ -56,7 +56,8 @@
                 var entity = await _dbSet.Where(_pridicate)
                                         .FirstOrDefaultAsync();
 
-                if (entity == null) return 0;
+                if (entity == null)
+                    return 0;
 
                 _dbSet.Remove(entity);
                 return await SaveChangesAsync();
