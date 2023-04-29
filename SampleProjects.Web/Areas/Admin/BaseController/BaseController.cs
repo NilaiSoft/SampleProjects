@@ -67,7 +67,7 @@ namespace SampleProjects.Web.Admin.BaseController
         public virtual async Task<IActionResult> Details(int id)
         {
             var model = await _repository.GetAsync(x => x.Id == id);
-            return View(model);
+            return View(_mapper.Map<TVModel>(model));
         }
     }
 }
