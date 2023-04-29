@@ -85,7 +85,7 @@ namespace SampleProjects.Web.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View();
+            return RedirectToAction(nameof(Create));
         }
 
         public override async Task<IActionResult> Edit(int id)
