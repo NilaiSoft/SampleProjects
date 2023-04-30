@@ -16,11 +16,5 @@ namespace SampleProjects.Web.Admin.Controllers
         {
             _repository = repository;
         }
-
-        [HttpPost]
-        public override Task<IActionResult> Create(CategoryModel entity)
-        {
-            return base.Create(entity);
-        }
     }
 }

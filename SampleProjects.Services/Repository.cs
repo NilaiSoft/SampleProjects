@@ -115,6 +115,7 @@
             //_context.Entry<TEntity>(entity).State = EntityState.Modified;
             #endregion
             _dbSet.Update(entity);
+            await SaveChangesAsync();
             return 1;
         }
 
