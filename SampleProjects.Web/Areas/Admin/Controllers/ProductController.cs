@@ -59,6 +59,8 @@ namespace SampleProjects.Web.Admin.Controllers
         [HttpPost]
         public override async Task<IActionResult> Create(ProductModel pModel)
         {
+            ModelState.Remove("Id");
+
             if (ModelState.IsValid)
             {
                 var pEntity = _mapper.Map<Product>(pModel);
