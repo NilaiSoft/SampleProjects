@@ -87,7 +87,9 @@ namespace SampleProjects.Web.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(Create));
+			var units = await _unitService.GetsAsync();
+			ViewBag.UnitList = new SelectList(units, "Id", "Name");
+			return View();
         }
 
         public override async Task<IActionResult> Edit(int id)
