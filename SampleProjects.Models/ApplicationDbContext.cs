@@ -37,9 +37,14 @@ namespace SampleProjects.Models
 
         private IDbContextTransaction _transaction;
 
-        public void BeginTransaction()
+        public async Task BeginTransactionAsync()
         {
-            _transaction = Database.BeginTransaction();
+            _transaction = await Database.BeginTransactionAsync();
+        }
+
+        public async Task RoolbackAsync()
+        {
+            await Database.RollbackTransactionAsync();
         }
 
         public async Task<int> CommitAsync()
@@ -47,12 +52,12 @@ namespace SampleProjects.Models
             try
             {
                 var result = await SaveChangesAsync();
-                //_transaction.Commit();
+                await _transaction.CommitAsync();
                 return result;
             }
             catch
             {
-                //await _transaction.RollbackAsync();
+                await _transaction.RollbackAsync();
                 await _transaction.DisposeAsync();
                 return 0;
             }

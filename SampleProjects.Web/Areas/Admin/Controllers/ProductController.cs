@@ -8,6 +8,7 @@ using SampleProjects.Services;
 using SampleProjects.Web.Admin.BaseController;
 using SampleProjects.Web.BaseController;
 using SampleProjects.Web.Factories;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -59,37 +60,50 @@ namespace SampleProjects.Web.Admin.Controllers
         [HttpPost]
         public override async Task<IActionResult> Create(ProductModel pModel)
         {
-            ModelState.Remove("Id");
-
-            if (ModelState.IsValid)
+            try
             {
-                var pEntity = _mapper.Map<Product>(pModel);
-                var product = await _productService.AddAsync(pEntity);
-
-                var picEntity = new Picture
+                ModelState.Remove("Id");
+                if (ModelState.IsValid)
                 {
-                    AltAttribute = pModel.Name,
-                    SeoFilename = pModel.Name,
-                    TitleAttribute = pModel.Name
-                };
-                var picture = await _pictureService.AddAsync(picEntity);
+                    await _productService.BeginTransactionAsync();
+                    var pEntity = _mapper.Map<Product>(pModel);
+                    var product = await _productService.AddAsync(pEntity);
 
-                //await _pictureBinaryService.AddAsync(picture.Entity, pModel.ImageFile);
+                    var picEntity = new Picture
+                    {
+                        AltAttribute = pModel.Name,
+                        SeoFilename = pModel.Name,
+                        TitleAttribute = pModel.Name
+                    };
+                    var picture = await _pictureService.AddAsync(picEntity);
 
-                var picProductEntity = new ProductPicture
-                {
-                    Product = pEntity,
-                    Picture = picEntity
-                };
-                var pictureProduct = await _productPictureService
-                    .AddAndSaveChangesAsync(picProductEntity);
+                    //await _pictureBinaryService.AddAsync(picture.Entity, pModel.ImageFile);
 
-                return RedirectToAction(nameof(Index));
+                    var picProductEntity = new ProductPicture
+                    {
+                        Product = pEntity,
+                        Picture = picEntity
+                    };
+
+                    var pictureProduct = await _productPictureService
+                        .AddAndSaveChangesAsync(picProductEntity);
+
+                    await _productService.CommitAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+
+                var units = await _unitService.GetsAsync();
+                ViewBag.UnitList = new SelectList(units, "Id", "Name");
+                return View();
             }
-
-			var units = await _unitService.GetsAsync();
-			ViewBag.UnitList = new SelectList(units, "Id", "Name");
-			return View();
+            catch (Exception ex)
+            {
+                await _productService.RoolbackAsync();
+                var units = await _unitService.GetsAsync();
+                ViewBag.UnitList = new SelectList(units, "Id", "Name");
+                return View();
+            }
         }
 
         public override async Task<IActionResult> Edit(int id)
