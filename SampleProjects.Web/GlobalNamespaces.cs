@@ -1,0 +1,14 @@
+﻿global using AutoMapper;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using SampleProjects.Models;
+global using SampleProjects.Models.ViewModels;
+global using SampleProjects.Services;
+global using SampleProjects.Services.UnitOfWork;
+global using SampleProjects.Web.Admin.BaseController;
+global using SampleProjects.Web.Factories;
+global using System;
+global using System.Linq;
+global using System.Threading.Tasks;

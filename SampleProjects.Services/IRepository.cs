@@ -41,9 +41,5 @@ namespace SampleProjects.Services
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);
         Task<bool> AnyAsync();
-
-        Task BeginTransactionAsync();
-        Task CommitAsync();
-        Task RoolbackAsync();
     }
 }

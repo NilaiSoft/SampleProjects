@@ -13,8 +13,4 @@
     <ProjectReference Include="..\SampleProjects.Models\SampleProjects.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UnitOfWork\" />
-  </ItemGroup>
-
 </Project>

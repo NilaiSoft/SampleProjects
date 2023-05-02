@@ -126,21 +126,6 @@
             return 1;
         }
 
-        public async Task BeginTransactionAsync()
-        {
-            await _context.BeginTransactionAsync();
-        }
-
-        public async Task CommitAsync()
-        {
-            await _context.CommitAsync();
-        }
-
-        public async Task RoolbackAsync()
-        {
-            await _context.RoolbackAsync();
-        }
-
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> _pridicate, Expression<Func<TEntity, TEntity>> selectItem)
         {
             return await _dbSet.Where(_pridicate).Select(selectItem).FirstOrDefaultAsync();

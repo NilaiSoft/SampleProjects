@@ -1,15 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using SampleProjects.Services;
-using System;
-using System.Linq;
-
-namespace SampleProjects.Framework.Infrastructure
+﻿namespace SampleProjects.Framework.Infrastructure
 {
     public static class DependencyRegistrar
     {
         public static void Register(this IServiceCollection services)
         {
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             var appServices = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes())

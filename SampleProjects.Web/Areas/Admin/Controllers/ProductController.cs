@@ -1,20 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
-using SampleProjects.Models;
-using SampleProjects.Models.ViewModels;
-using SampleProjects.Services;
-using SampleProjects.Web.Admin.BaseController;
-using SampleProjects.Web.BaseController;
-using SampleProjects.Web.Factories;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SampleProjects.Web.Admin.Controllers
+﻿namespace SampleProjects.Web.Admin.Controllers
 {
     public class ProductController : AdminBaseController<Product, ProductModel>
     {
@@ -24,12 +8,13 @@ namespace SampleProjects.Web.Admin.Controllers
         private readonly IProductModelFactory _productModelFactory;
         private readonly IPictureBinaryService _pictureBinaryService;
         private readonly IUnitService _unitService;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<ProductController> _logger;
         private readonly IMapper _mapper;
 
         public ProductController(IProductService productService,
             IUnitService unitService, IMapper mapper
-            , IRepository<Product, ProductModel> repository, ILogger<ProductController> logger, IPictureService pictureService, IPictureBinaryService pictureBinaryService, IProductPictureService productPictureService, IProductModelFactory productModelFactory) : base(repository, mapper)
+            , IRepository<Product, ProductModel> repository, ILogger<ProductController> logger, IPictureService pictureService, IPictureBinaryService pictureBinaryService, IProductPictureService productPictureService, IProductModelFactory productModelFactory, IUnitOfWork unitOfWork) : base(repository, mapper)
         {
             _productService = productService;
             _unitService = unitService;
@@ -40,6 +25,7 @@ namespace SampleProjects.Web.Admin.Controllers
             _pictureBinaryService = pictureBinaryService;
             _productPictureService = productPictureService;
             _productModelFactory = productModelFactory;
+            _unitOfWork = unitOfWork;
         }
 
         public override async Task<IActionResult> Index()
@@ -65,7 +51,7 @@ namespace SampleProjects.Web.Admin.Controllers
                 ModelState.Remove("Id");
                 if (ModelState.IsValid)
                 {
-                    await _productService.BeginTransactionAsync();
+                    await _unitOfWork.BeginTransactionAsync();
                     var pEntity = _mapper.Map<Product>(pModel);
                     var product = await _productService.AddAsync(pEntity);
 
@@ -88,7 +74,7 @@ namespace SampleProjects.Web.Admin.Controllers
                     var pictureProduct = await _productPictureService
                         .AddAndSaveChangesAsync(picProductEntity);
 
-                    await _productService.CommitAsync();
+                    await _unitOfWork.CommitAsync();
 
                     return RedirectToAction(nameof(Index));
                 }
@@ -99,7 +85,7 @@ namespace SampleProjects.Web.Admin.Controllers
             }
             catch (Exception ex)
             {
-                await _productService.RoolbackAsync();
+                await _unitOfWork.RoolbackAsync();
                 var units = await _unitService.GetsAsync();
                 ViewBag.UnitList = new SelectList(units, "Id", "Name");
                 return View();
