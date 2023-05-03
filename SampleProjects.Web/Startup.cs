@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ using SampleProjects.Models;
 using SampleProjects.Web.Configs;
 using SampleProjects.Web.Infrastructure;
 using System.Net;
+using System.Security.Policy;
 
 namespace SampleProjects.Web
 {
@@ -39,7 +41,7 @@ namespace SampleProjects.Web
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAutoMapper();
-
+            services.AddMvc().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -53,13 +55,16 @@ namespace SampleProjects.Web
             if (env.IsDevelopment())
             {
                 //app.UseDeveloperExceptionPage();
-                app.UseExceptionHandler(c => c.Run(async context =>
+                app.UseExceptionHandler(c => c.Run(async option =>
                 {
-                    var exception = context.Features
+                    var exception = option.Features
                         .Get<IExceptionHandlerPathFeature>()
                         .Error;
                     var response = new { error = exception.Message };
-                    await context.Response.WriteAsJsonAsync(response);
+                    //await option.Response.WriteAsJsonAsync(response);
+                    //option.Response.Redirect("/Home/Index");
+                    option.Response.Redirect($"/ExceptionHandling/Index?exception=" +
+                        $"{exception.Message}&statusCode={option.Response.StatusCode}");
                     //await context.Response.WriteAsync(
                     //                         "<a href=\"/\">Home</a><br>\r\n");
                 }));
