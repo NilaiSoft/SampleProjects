@@ -60,6 +60,8 @@ namespace SampleProjects.Web
                         .Error;
                     var response = new { error = exception.Message };
                     await context.Response.WriteAsJsonAsync(response);
+                    //await context.Response.WriteAsync(
+                    //                         "<a href=\"/\">Home</a><br>\r\n");
                 }));
                 app.UseMigrationsEndPoint();
             }
