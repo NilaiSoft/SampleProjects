@@ -62,7 +62,6 @@ namespace SampleProjects.Web
                         .Error;
                     var response = new { error = exception.Message };
                     //await option.Response.WriteAsJsonAsync(response);
-                    //option.Response.Redirect("/Home/Index");
                     option.Response.Redirect($"/ExceptionHandling/Index?exception=" +
                         $"{exception.Message}&statusCode={option.Response.StatusCode}");
                     //await context.Response.WriteAsync(
