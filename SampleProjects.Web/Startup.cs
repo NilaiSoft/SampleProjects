@@ -41,7 +41,7 @@ namespace SampleProjects.Web
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAutoMapper();
-            services.AddMvc().AddRazorRuntimeCompilation();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
