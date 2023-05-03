@@ -83,7 +83,7 @@
                 ViewBag.UnitList = new SelectList(units, "Id", "Name");
                 return View();
             }
-            catch (Exception ex)
+            catch
             {
                 await _unitOfWork.RoolbackAsync();
                 var units = await _unitService.GetsAsync();
