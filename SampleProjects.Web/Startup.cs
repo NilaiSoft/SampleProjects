@@ -53,23 +53,14 @@ namespace SampleProjects.Web
             if (env.IsDevelopment())
             {
                 //app.UseDeveloperExceptionPage();
-                app.UseExceptionHandler(appError =>
+                app.UseExceptionHandler(c => c.Run(async context =>
                 {
-                    appError.Run(async context =>
-                    {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        context.Response.ContentType = "application/json";
-                        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-                        if (contextFeature != null)
-                        {
-                            await context.Response.WriteAsync(new ErrorDetails()
-                            {
-                                StatusCode = context.Response.StatusCode,
-                                Message = "Internal Server Error."
-                            }.ToString());
-                        }
-                    });
-                });
+                    var exception = context.Features
+                        .Get<IExceptionHandlerPathFeature>()
+                        .Error;
+                    var response = new { error = exception.Message };
+                    await context.Response.WriteAsJsonAsync(response);
+                }));
                 app.UseMigrationsEndPoint();
             }
             else
