@@ -4,7 +4,7 @@ namespace SampleProjects.Web.Controllers
 {
     public class ExceptionHandlingController : Controller
     {
-        public IActionResult Index(string exception, int statusCode)
+        public PartialViewResult Index(string exception, int statusCode)
         {
             var model = new ErrorDetails
             {
@@ -12,7 +12,7 @@ namespace SampleProjects.Web.Controllers
                 StatusCode = statusCode
             };
 
-            return View(model);
+            return PartialView(model);
         }
     }
 }
