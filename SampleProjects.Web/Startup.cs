@@ -52,43 +52,14 @@ namespace SampleProjects.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseExceptionHandler(env);
+
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
-                app.UseExceptionHandler(c => c.Run(async option =>
-                {
-                    var exception = option.Features
-                        .Get<IExceptionHandlerPathFeature>()
-                        .Error;
-                    var response = new { error = exception.Message };
-                    //await option.Response.WriteAsJsonAsync(response);
-                    option.Response.Redirect($"/ExceptionHandling/Index?exception=" +
-                        $"{exception.Message}&statusCode={option.Response.StatusCode}");
-                    //await context.Response.WriteAsync(
-                    //                         "<a href=\"/\">Home</a><br>\r\n");
-                }));
                 app.UseMigrationsEndPoint();
             }
             else
             {
-                //app.UseExceptionHandler("/Error");
-                app.UseExceptionHandler(appError =>
-                {
-                    appError.Run(async context =>
-                    {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        context.Response.ContentType = "application/json";
-                        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-                        if (contextFeature != null)
-                        {
-                            await context.Response.WriteAsync(new ErrorDetails()
-                            {
-                                StatusCode = context.Response.StatusCode,
-                                Message = "Internal Server Error."
-                            }.ToString());
-                        }
-                    });
-                });
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
